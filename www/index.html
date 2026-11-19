@@ -31,8 +31,12 @@ footer button{width:46px;height:46px;border-radius:50%;border:0;background:#4a5b
 <div id="cfg">
   <label>Chave da API do Gemini (aistudio.google.com/apikey)</label>
   <input id="key" type="password" placeholder="AIza...">
-  <label>Voz</label>
+  <label>Modo de voz</label>
+  <select id="mode"><option value="gemini">Gemini (voz e áudio na nuvem)</option><option value="native">Nativo Android (reconhecimento + voz do aparelho)</option></select>
+  <label>Voz do Gemini</label>
   <select id="voice"></select>
+  <label>Voz nativa do Android</label>
+  <select id="nvoice"></select>
   <label>Personalidade</label>
   <textarea id="persona" rows="3"></textarea>
   <label>Modelo de texto</label>
@@ -49,16 +53,46 @@ footer button{width:46px;height:46px;border-radius:50%;border:0;background:#4a5b
 <script>
 const $=id=>document.getElementById(id);
 const VOICES=["Kore","Puck","Zephyr","Charon","Fenrir","Leda","Aoede","Orus","Callirrhoe","Enceladus","Umbriel","Algieba","Despina","Achernar","Sulafat","Gacrux"];
-const DEF={key:"",voice:"Kore",persona:"Você é um bichinho companheiro fofo e curioso que vive no mundo de realidade aumentada do usuário. Fale de forma carinhosa, natural e curta (1 a 2 frases), no mesmo idioma do usuário.",mText:"gemini-2.5-flash",mTts:"gemini-2.5-flash-preview-tts"};
+const DEF={key:"",voice:"Kore",persona:"Você é um bichinho companheiro fofo e curioso que vive no mundo de realidade aumentada do usuário. Fale de forma carinhosa, natural e curta (1 a 2 frases), no mesmo idioma do usuário.",mText:"gemini-3.8-flash",mTts:"gemini-3.1-flash-tts-preview",mode:"gemini",nvoice:""};
 const S=Object.assign({},DEF,JSON.parse(localStorage.getItem("cfg")||"{}"));
 const hist=[];
 let rec=null,actx=null,src=null,busy=false;
 
 VOICES.forEach(v=>$("voice").add(new Option(v,v)));
-["key","voice","persona","mText","mTts"].forEach(k=>{
+["key","mode","voice","nvoice","persona","mText","mTts"].forEach(k=>{
   $(k).value=S[k];
   $(k).onchange=()=>{S[k]=$(k).value.trim();localStorage.setItem("cfg",JSON.stringify(S))};
 });
+function loadVoices(){
+  const sel=$("nvoice");sel.innerHTML="";sel.add(new Option("Padrão do aparelho",""));
+  try{speechSynthesis.getVoices().filter(v=>v.lang.toLowerCase().startsWith("pt")).forEach(v=>sel.add(new Option(v.name+" ("+v.lang+")",v.name)))}catch(e){}
+  sel.value=S.nvoice;
+}
+loadVoices();try{speechSynthesis.onvoiceschanged=loadVoices}catch(e){}
+function nativeSpeak(text){return new Promise(res=>{
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);u.lang="pt-BR";
+  const v=speechSynthesis.getVoices().find(x=>x.name===S.nvoice);
+  if(v){u.voice=v;u.lang=v.lang}
+  u.onend=u.onerror=res;speechSynthesis.speak(u);
+})}
+let listening=false;
+async function nativeListen(){
+  const SR=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.SpeechRecognition;
+  if(!SR)return add("Plugin de reconhecimento não encontrado.","s");
+  if(listening){try{await SR.stop()}catch(e){}return}
+  try{
+    const a=await SR.available();
+    if(!a.available)return add("Reconhecimento de voz indisponível neste aparelho.","s");
+    const p=await SR.requestPermissions();
+    if(p.speechRecognition!=="granted")return add("Permissão do microfone negada.","s");
+    listening=true;$("mic").classList.add("on");$("mic").textContent="⏹";
+    const r=await SR.start({language:"pt-BR",maxResults:1,partialResults:false,popup:false});
+    const t=r&&r.matches&&r.matches[0];
+    if(!t)add("Não entendi, tente de novo.","s");else turn(t);
+  }catch(e){add("Reconhecimento: "+(e.message||e),"s")}
+  listening=false;$("mic").classList.remove("on");$("mic").textContent="🎤";
+}
 function toggleCfg(){const c=$("cfg");c.style.display=c.style.display==="block"?"none":"block"}
 if(!S.key)toggleCfg();
 
@@ -66,10 +100,13 @@ function add(t,c){const d=document.createElement("div");d.className="m "+c;d.tex
 
 async function gem(model,body){
   if(!S.key){toggleCfg();throw new Error("Coloque sua chave da API nas configurações.")}
-  const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,{
-    method:"POST",headers:{"Content-Type":"application/json","x-goog-api-key":S.key},body:JSON.stringify(body)});
-  if(!r.ok)throw new Error((await r.text()).slice(0,300));
-  return r.json();
+  for(let i=0;;i++){
+    const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,{
+      method:"POST",headers:{"Content-Type":"application/json","x-goog-api-key":S.key},body:JSON.stringify(body)});
+    if(r.ok)return r.json();
+    if((r.status===503||r.status===429)&&i<3){await new Promise(s=>setTimeout(s,1500*2**i));continue}
+    throw new Error((await r.text()).slice(0,300));
+  }
 }
 
 // Envia um turno (texto ou áudio WAV em base64) e fala a resposta
@@ -95,6 +132,7 @@ async function turn(text,wavB64){
 }
 
 async function speak(text){
+  if(S.mode==="native")return nativeSpeak(text);
   const j=await gem(S.mTts,{contents:[{parts:[{text}]}],generationConfig:{responseModalities:["AUDIO"],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:S.voice}}}}});
   const b64=j.candidates[0].content.parts[0].inlineData.data;
   const bin=atob(b64),n=bin.length>>1,f=new Float32Array(n);
@@ -129,6 +167,7 @@ function stopRec(){
 }
 
 $("mic").onclick=async()=>{
+  if(S.mode==="native")return nativeListen();
   if(busy)return;
   actx=actx||new AudioContext();actx.resume();
   try{
