@@ -31,6 +31,9 @@ footer button{width:46px;height:46px;border-radius:50%;border:0;background:#4a5b
 <div id="cfg">
   <label>Chave da API do Gemini (aistudio.google.com/apikey)</label>
   <input id="key" type="password" placeholder="AIza...">
+  <label>Cérebro (modelo de texto)</label>
+  <select id="engine"><option value="proprio">Modelo próprio (local, sem internet)</option><option value="gemini">Gemini (nuvem)</option></select>
+  <div id="cnt" style="font-size:12px;opacity:.6;margin-top:4px"></div>
   <label>Modo de voz</label>
   <select id="mode"><option value="gemini">Gemini (voz e áudio na nuvem)</option><option value="native">Nativo Android (reconhecimento + voz do aparelho)</option></select>
   <label>Voz do Gemini</label>
@@ -50,16 +53,17 @@ footer button{width:46px;height:46px;border-radius:50%;border:0;background:#4a5b
   <button id="send">➤</button>
   <button id="mic">🎤</button>
 </footer>
+<script src="brain.js"></script>
 <script>
 const $=id=>document.getElementById(id);
 const VOICES=["Kore","Puck","Zephyr","Charon","Fenrir","Leda","Aoede","Orus","Callirrhoe","Enceladus","Umbriel","Algieba","Despina","Achernar","Sulafat","Gacrux"];
-const DEF={key:"",voice:"Kore",persona:"Você é um bichinho companheiro fofo e curioso que vive no mundo de realidade aumentada do usuário. Fale de forma carinhosa, natural e curta (1 a 2 frases), no mesmo idioma do usuário.",mText:"gemini-3.8-flash",mTts:"gemini-3.1-flash-tts-preview",mode:"gemini",nvoice:""};
+const DEF={key:"",voice:"Kore",persona:"Você é um bichinho companheiro fofo e curioso que vive no mundo de realidade aumentada do usuário. Fale de forma carinhosa, natural e curta (1 a 2 frases), no mesmo idioma do usuário.",mText:"gemini-3.8-flash",mTts:"gemini-3.1-flash-tts-preview",mode:"native",nvoice:"",engine:"proprio"};
 const S=Object.assign({},DEF,JSON.parse(localStorage.getItem("cfg")||"{}"));
 const hist=[];
 let rec=null,actx=null,src=null,busy=false;
 
 VOICES.forEach(v=>$("voice").add(new Option(v,v)));
-["key","mode","voice","nvoice","persona","mText","mTts"].forEach(k=>{
+["key","engine","mode","voice","nvoice","persona","mText","mTts"].forEach(k=>{
   $(k).value=S[k];
   $(k).onchange=()=>{S[k]=$(k).value.trim();localStorage.setItem("cfg",JSON.stringify(S))};
 });
@@ -94,7 +98,8 @@ async function nativeListen(){
   listening=false;$("mic").classList.remove("on");$("mic").textContent="🎤";
 }
 function toggleCfg(){const c=$("cfg");c.style.display=c.style.display==="block"?"none":"block"}
-if(!S.key)toggleCfg();
+$("cnt").textContent="Respostas possíveis no modelo próprio: "+Brain.count().toLocaleString("pt-BR");
+if(!S.key&&S.engine==="gemini")toggleCfg();
 
 function add(t,c){const d=document.createElement("div");d.className="m "+c;d.textContent=t;$("chat").appendChild(d);$("chat").scrollTop=1e9;return d}
 
@@ -114,6 +119,13 @@ async function turn(text,wavB64){
   if(busy)return;busy=true;
   const wait=add("…","s");
   try{
+    if(S.engine==="proprio"){
+      if(wavB64)throw new Error("No modelo próprio, use o modo de voz Nativo Android para falar.");
+      add(text,"u");
+      const rp=Brain.reply(text);
+      wait.remove();add(rp,"b");
+      busy=false;await speak(rp);return;
+    }
     let parts,userBubble=null;
     if(wavB64){
       parts=[{inlineData:{mimeType:"audio/wav",data:wavB64}},{text:'Transcreva o áudio e responda como o companheiro. Retorne apenas JSON: {"transcript":"...","reply":"..."}'}];
