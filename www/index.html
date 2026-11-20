@@ -67,19 +67,27 @@ VOICES.forEach(v=>$("voice").add(new Option(v,v)));
   $(k).value=S[k];
   $(k).onchange=()=>{S[k]=$(k).value.trim();localStorage.setItem("cfg",JSON.stringify(S))};
 });
-function loadVoices(){
+const TTSP=()=>window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.TextToSpeech;
+let nvList=[];
+async function loadVoices(){
   const sel=$("nvoice");sel.innerHTML="";sel.add(new Option("Padrão do aparelho",""));
-  try{speechSynthesis.getVoices().filter(v=>v.lang.toLowerCase().startsWith("pt")).forEach(v=>sel.add(new Option(v.name+" ("+v.lang+")",v.name)))}catch(e){}
+  try{
+    const r=await TTSP().getSupportedVoices();
+    nvList=r.voices||[];
+    nvList.forEach(v=>{if((v.lang||"").toLowerCase().startsWith("pt"))sel.add(new Option(v.name+" ("+v.lang+")",v.name))});
+  }catch(e){}
   sel.value=S.nvoice;
 }
-loadVoices();try{speechSynthesis.onvoiceschanged=loadVoices}catch(e){}
-function nativeSpeak(text){return new Promise(res=>{
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);u.lang="pt-BR";
-  const v=speechSynthesis.getVoices().find(x=>x.name===S.nvoice);
-  if(v){u.voice=v;u.lang=v.lang}
-  u.onend=u.onerror=res;speechSynthesis.speak(u);
-})}
+setTimeout(loadVoices,800);
+async function nativeSpeak(text){
+  const T=TTSP();
+  if(!T)throw new Error("Plugin de voz do Android não encontrado.");
+  const o={text,lang:"pt-BR",rate:1,pitch:1,volume:1,category:"playback"};
+  const vi=nvList.findIndex(v=>v.name===S.nvoice);
+  if(vi>=0)o.voice=vi;
+  try{await T.stop()}catch(e){}
+  await T.speak(o);
+}
 let listening=false;
 async function nativeListen(){
   const SR=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.SpeechRecognition;
