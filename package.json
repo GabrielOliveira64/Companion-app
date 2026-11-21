@@ -1,12 +1,17 @@
 {
   "name": "companion-chat",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "test": "node test/brain.test.js"
+  },
   "dependencies": {
     "@capacitor-community/speech-recognition": "^7.0.1",
     "@capacitor-community/text-to-speech": "6.1.0",
     "@capacitor/android": "^7.0.0",
-    "@capacitor/core": "^7.0.0"
+    "@capacitor/core": "^7.0.0",
+    "@xenova/transformers": "2.17.2"
   },
   "devDependencies": {
     "@capacitor/cli": "^7.0.0"
