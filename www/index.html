@@ -44,6 +44,7 @@ footer button{width:46px;height:46px;border-radius:50%;border:0;background:#4a5b
   <div class="row" style="margin-top:16px"><span>Compreensão avançada</span><button id="embOn" class="tg"></button></div>
   <div id="embSt" class="note"></div>
   <div id="cnt" class="note"></div>
+  <div id="ver" class="note"></div>
   <button id="selfTest" class="btn">🧪 Testar compreensão</button>
   <pre id="rep"></pre>
   <button id="forget" class="btn">Esquecer meu nome</button>
@@ -77,9 +78,10 @@ async function loadVoices(){
   try{
     const r=await TTSP().getSupportedVoices();
     nvList=r.voices||[];
+    // No Android o campo "name" é igual para todas as vozes ("português Brasil"); o identificador único é o voiceURI.
     const pt=nvList.filter(v=>(v.lang||"").toLowerCase().replace("_","-").startsWith("pt"));
-    pt.sort((a,b)=>((b.lang||"").toLowerCase().includes("br")-(a.lang||"").toLowerCase().includes("br"))||a.name.localeCompare(b.name));
-    pt.forEach((v,i)=>sel.add(new Option("Voz "+(i+1)+" — "+v.name+" ("+v.lang+")",v.name)));
+    pt.sort((a,b)=>((b.lang||"").toLowerCase().includes("br")-(a.lang||"").toLowerCase().includes("br"))||String(a.voiceURI).localeCompare(String(b.voiceURI)));
+    pt.forEach((v,i)=>sel.add(new Option("Voz "+(i+1)+" — "+v.voiceURI+(v.localService===false?" (online)":""),v.voiceURI)));
   }catch(e){}
   sel.value=S.nvoice;if(sel.value!==S.nvoice){sel.value="";}
 }
@@ -88,7 +90,7 @@ async function nativeSpeak(text){
   const T=TTSP();
   if(!T)throw new Error("Plugin de voz do Android não encontrado.");
   const o={text,lang:"pt-BR",rate:1,pitch:1,volume:1,category:"playback"};
-  const vi=nvList.findIndex(v=>v.name===S.nvoice);
+  const vi=S.nvoice?nvList.findIndex(v=>v.voiceURI===S.nvoice):-1;
   if(vi>=0)o.voice=vi;
   try{await T.stop()}catch(e){}
   await T.speak(o);
@@ -133,6 +135,7 @@ const setEmb=(k,a)=>{$("embSt").textContent=EMB_MSG[k](a);$("embOn").textContent
 let embLoaded=false,embBusy=false;
 async function startModel(){
   if(embBusy||embLoaded)return;
+  if(typeof Brain.attach!=="function")return setEmb("fail","brain.js antigo");
   if(!S.emb){Brain.detach();return setEmb("off")}
   if(localStorage.getItem("emb_loading")==="1"){localStorage.removeItem("emb_loading");S.emb=false;save();return setEmb("crash")}
   embBusy=true;localStorage.setItem("emb_loading","1");
@@ -184,8 +187,11 @@ $("send").onclick=sendTxt;
 $("txt").onkeydown=e=>{if(e.key==="Enter")sendTxt()};
 $("mic").onclick=nativeListen;
 
+const NEW_BRAIN=typeof Brain.selfTest==="function"&&typeof Brain.attach==="function";
+$("ver").textContent=NEW_BRAIN?"Cérebro: brain.js v"+Brain.version+" ✓":"⚠️ brain.js ANTIGO: substitua www/brain.js pelo novo e gere o APK de novo.";
+if(!NEW_BRAIN)add("⚠️ O arquivo www/brain.js do app é a versão antiga. Substitua e gere o APK de novo.","s");
 const c=Brain.count();
-$("cnt").textContent="Frases-base: "+c.base+" · combinações de palavras: "+c.combos.toLocaleString("pt-BR");
+$("cnt").textContent=typeof c==="object"?"Frases-base: "+c.base+" · combinações de palavras: "+c.combos.toLocaleString("pt-BR"):"";
 paintVoiceBtn();setEmb(S.emb?"loading":"off");
 setTimeout(loadVoices,800);setTimeout(loadVoices,3000);
 add("Oi! Toque no 🎤 para falar.","s");
