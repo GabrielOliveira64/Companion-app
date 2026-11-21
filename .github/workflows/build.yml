@@ -15,6 +15,15 @@ jobs:
           distribution: temurin
           java-version: 21
       - run: npm install
+      - name: Cache do modelo de compreensão
+        uses: actions/cache@v4
+        with:
+          path: www/models
+          key: modelo-minilm-multilingual-v1
+      - name: Preparar modelo de compreensão (biblioteca + modelo)
+        # Se o download falhar, o APK ainda é gerado; o app baixa o modelo na 1ª abertura.
+        continue-on-error: true
+        run: npm run setup
       - run: npx cap add android
       - name: Permissão do microfone
         run: |
