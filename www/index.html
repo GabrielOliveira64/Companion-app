@@ -36,15 +36,24 @@ footer button{width:46px;height:46px;border-radius:50%;border:0;background:#4a5b
 <body>
 <header><b>🐾 Companion</b><button class="ic" onclick="toggleCfg()">⚙️</button></header>
 <div id="cfg">
+  <label>Personalidade</label>
+  <select id="persona"></select>
+  <div id="pdesc" class="note"></div>
+
   <div class="row"><span>Voz dela</span><button id="voiceOn" class="tg"></button></div>
   <label>Voz do sistema (Google)</label>
   <select id="nvoice"></select>
   <button id="testVoice" class="btn">🔊 Testar voz</button>
 
+  <div class="row" style="margin-top:16px"><span>Consultar a Wikipédia</span><button id="wikiOn" class="tg"></button></div>
+  <div class="note">Quando ela não souber, procura um resumo na Wikipédia. Só o assunto é enviado, e precisa de internet.</div>
+
   <div class="row" style="margin-top:16px"><span>Compreensão avançada</span><button id="embOn" class="tg"></button></div>
+  <div class="note">Desligada = modo leve (quase nenhum uso de memória). Ligada = modelo de IA de ~118 MB, mais preciso, mas pesado.</div>
   <div id="embSt" class="note"></div>
   <div id="cnt" class="note"></div>
   <div id="ver" class="note"></div>
+  <div id="ver2" class="note"></div>
   <button id="selfTest" class="btn">🧪 Testar compreensão</button>
   <pre id="rep"></pre>
   <button id="forget" class="btn">Esquecer meu nome</button>
@@ -55,10 +64,12 @@ footer button{width:46px;height:46px;border-radius:50%;border:0;background:#4a5b
   <button id="send">➤</button>
   <button id="mic">🎤</button>
 </footer>
+<script src="personas.js"></script>
+<script src="knowledge.js"></script>
 <script src="brain.js"></script>
 <script>
 const $=id=>document.getElementById(id);
-const DEF={voiceOn:true,nvoice:"",emb:true};
+const DEF={voiceOn:true,nvoice:"",emb:false,persona:"dinamica",wiki:true};
 const S=Object.assign({},DEF,JSON.parse(localStorage.getItem("cfg")||"{}"));
 // limpeza: remove campos de versões antigas (inclusive a chave de API que ficava em texto puro)
 Object.keys(S).forEach(k=>{if(!(k in DEF))delete S[k]});
@@ -165,6 +176,19 @@ $("selfTest").onclick=async()=>{
 };
 $("forget").onclick=()=>{Brain.reset();add("Pronto, esqueci o seu nome.","s")};
 
+/* ---------- Personalidade e Wikipédia ---------- */
+function applyPrefs(){Brain.setPrefs&&Brain.setPrefs({persona:S.persona,wiki:S.wiki})}
+function initPersona(){
+  const P=window.Personas,sel=$("persona");
+  if(!P){sel.disabled=true;sel.add(new Option("(personas.js ausente)",""));return}
+  Object.keys(P.PERSONAS).forEach(k=>sel.add(new Option(P.PERSONAS[k].name,k)));
+  if(!P.PERSONAS[S.persona])S.persona="dinamica";
+  sel.value=S.persona;$("pdesc").textContent=P.PERSONAS[S.persona].desc;
+  sel.onchange=()=>{S.persona=sel.value;save();$("pdesc").textContent=P.PERSONAS[S.persona].desc;applyPrefs()};
+}
+function paintWiki(){const b=$("wikiOn");b.textContent=S.wiki?"Ligada":"Desligada";b.classList.toggle("on",S.wiki)}
+$("wikiOn").onclick=()=>{S.wiki=!S.wiki;save();paintWiki();applyPrefs()};
+
 /* ---------- Tela ---------- */
 function toggleCfg(){
   const c=$("cfg"),open=c.style.display!=="block";
@@ -188,10 +212,13 @@ $("txt").onkeydown=e=>{if(e.key==="Enter")sendTxt()};
 $("mic").onclick=nativeListen;
 
 const NEW_BRAIN=typeof Brain.selfTest==="function"&&typeof Brain.attach==="function";
-$("ver").textContent=NEW_BRAIN?"Cérebro: brain.js v"+Brain.version+" ✓":"⚠️ brain.js ANTIGO: substitua www/brain.js pelo novo e gere o APK de novo.";
-if(!NEW_BRAIN)add("⚠️ O arquivo www/brain.js do app é a versão antiga. Substitua e gere o APK de novo.","s");
+const NEW3=NEW_BRAIN&&/^3\./.test(Brain.version||"");
+$("ver").textContent=NEW3?"Cérebro: brain.js v"+Brain.version+" ✓":"⚠️ brain.js desatualizado: substitua www/brain.js pelo novo e gere o APK de novo.";
+$("ver2").textContent="Conhecimento: "+(window.Knowledge?"knowledge.js v"+Knowledge.version+" ✓":"⚠️ knowledge.js ausente")+" · Personalidades: "+(window.Personas?"personas.js v"+Personas.version+" ✓":"⚠️ personas.js ausente");
+if(!NEW3)add("⚠️ O arquivo www/brain.js do app é uma versão antiga. Substitua e gere o APK de novo.","s");
 const c=Brain.count();
-$("cnt").textContent=typeof c==="object"?"Frases-base: "+c.base+" · combinações de palavras: "+c.combos.toLocaleString("pt-BR"):"";
+$("cnt").textContent=typeof c==="object"?"Conhecimentos offline: "+(c.kb||0)+" · frases-base: "+c.base+" · combinações: "+c.combos.toLocaleString("pt-BR"):"";
+initPersona();paintWiki();applyPrefs();
 paintVoiceBtn();setEmb(S.emb?"loading":"off");
 setTimeout(loadVoices,800);setTimeout(loadVoices,3000);
 add("Oi! Toque no 🎤 para falar.","s");

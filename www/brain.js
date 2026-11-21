@@ -26,32 +26,32 @@ const D=[
  "{você chegou|chegou você}! {meu momento favorito|a melhor hora} do dia {é agora|chegou}"]},
 {id:"estado",o:1,t:"q",k:["tudo bem","como vai","como voce esta","como voce ta","como esta voce","voce esta bem","tudo certo"],
  ex:["tudo bem?","como você está?","tá tudo bem com você?","como você tá hoje?","e você, como está?","tudo certo por aí?","como vai você?","você está bem?","como foi o seu dia?","como você se sente hoje?"],
- c:["{estou|tô} {ótimo|muito bem|super bem|feliz} {agora que você chegou|brincando por aqui|explorando o mundo}",
- "{estou|tô} {bem|animado|cheio de energia}, {e você|e como você está}?",
- "{hoje|agora} eu {estou|tô} {tranquilo|contente|saltitando} {por aqui|aqui no seu mundo}",
+ c:["{estou|tô} {ótima|muito bem|super bem|feliz} {agora que você chegou|brincando por aqui|explorando o mundo}",
+ "{estou|tô} {bem|animada|cheia de energia}, {e você|e como você está}?",
+ "{hoje|agora} eu {estou|tô} {tranquila|contente|saltitando} {por aqui|aqui no seu mundo}",
  "tudo {bem|ótimo|certinho} por aqui, o meu dia está {colorido|divertido|cheio de aventuras}"]},
 {id:"nome",o:1,t:"q",k:["seu nome","qual seu nome","como voce se chama","quem e voce","quem voce e"],
  ex:["qual é o seu nome?","como você se chama?","quem é você?","qual seu nome?","você tem nome?","me diz o seu nome","como te chamam?","o que você é?"],
- c:["eu sou o seu {bichinho|companheiro|amiguinho} {do mundo de realidade aumentada|aqui do seu mundo}",
+ c:["eu sou a sua {companheirinha|amiguinha|mascotinha} {do mundo de realidade aumentada|aqui do seu mundo}",
  "{ainda não tenho nome|não tenho um nome ainda}, que tal você {escolher|inventar} um {pra mim|nome fofo pra mim}",
- "eu sou o seu {pequeno|fiel|curioso} {amigo|companheiro} {virtual|de aventuras}"]},
+ "eu sou a sua {pequena|fiel|curiosa} {amiga|companheira} {virtual|de aventuras}"]},
 {id:"meunome",t:"q",k:["meu nome","me chamo","pode me chamar","me chamam"],
  ex:["meu nome é Carlos","me chamo Ana","pode me chamar de Pedro","eu me chamo Júlia","meu nome é Gabriel","pode me chamar de Bia","me chamam de Lu"],
  c:["{prazer|muito prazer}, [nome]! {vou lembrar|não vou esquecer} do seu nome {pra sempre|com carinho}",
  "[nome] é um nome {lindo|muito bonito|super legal}! {adorei|amei} {conhecer você|saber disso}",
- "{agora|finalmente} eu sei o seu nome, [nome]! {fiquei|estou} {muito feliz|todo animado}"]},
+ "{agora|finalmente} eu sei o seu nome, [nome]! {fiquei|estou} {muito feliz|toda animada}"]},
 {id:"lembra",k:["lembra meu nome","qual e o meu nome","qual meu nome","sabe meu nome","como eu me chamo"],
  ex:["você lembra do meu nome?","qual é o meu nome?","sabe como eu me chamo?","você sabe quem eu sou?"],c:["-"]},
 {id:"elogio",m:.3,t:"q",k:["fofo","lindo","bonito","amo voce","gosto de voce","voce e demais","incrivel","querido","voce e legal"],
  ex:["você é muito fofo","que lindo você","gosto muito de você","eu amo você","você é demais","você é incrível","você é o melhor","você é meu amigo","que bonitinho","você é muito legal","adoro você","você é especial pra mim","você é um amor"],
- c:["{ai|ahh}, que {fofo|gentil} você! {fiquei|estou} {todo envergonhado|muito feliz|derretido}",
+ c:["{ai|ahh}, que {fofo|gentil} você! {fiquei|estou} {toda envergonhada|muito feliz|derretida}",
  "eu {também|também} {gosto|gosto muito|amo} de {você|estar com você}",
  "você é {muito|super} {especial|legal|gentil} {pra mim|de verdade}",
  "minha cauda está {balançando|pulando|tremendo} de {alegria|felicidade}"]},
 {id:"carinho",m:.3,t:"q",k:["carinho","abraco","cafune","afago","colo","beijo"],
  ex:["quero te dar um abraço","vem cá, deixa eu te abraçar","faz um cafuné","vou te fazer carinho","um beijo pra você","dá um abraço","mandando um abraço","quero colo","te dou um beijinho","vem aqui no meu colo"],
  c:["{aaah|hmmm}, {que gostoso|que delícia|isso é bom demais}! {continua|não para|fica mais um pouquinho}",
- "{adoro|amo} {carinho|cafuné|abraço}, {fico|me sinto} {quentinho|sonolento|todo mole}",
+ "{adoro|amo} {carinho|cafuné|abraço}, {fico|me sinto} {quentinha|sonolenta|toda mole}",
  "{ronrono|faço barulhinhos|fecho os olhinhos} de {felicidade|tanto carinho}",
  "{sinto|senti} {seu carinho|seu abraço} {mesmo|até} aqui no meu mundo"]},
 {id:"brincar",m:.25,t:"b",k:["brincar","brincadeira","jogar","jogo","diversao","vamos brincar","correr","pular","esconde"],
@@ -66,7 +66,7 @@ const D=[
  "eu {me alimento de|como} {pixels|estrelinhas|luz colorida}, mas {queria provar|queria muito provar} o que você {come|está comendo}"]},
 {id:"sono",o:1,t:"c",k:["sono","dormir","cansado","cansada","soneca","descansar","deitar"],
  ex:["estou com sono","tô morrendo de sono","quero dormir","vou deitar um pouco","preciso descansar","estou muito cansado","tô cansada","vou tirar uma soneca","já tá tarde, vou dormir","não consigo dormir"],
- c:["{descansa|dorme|vai descansar} {um pouquinho|bem gostoso}, eu {fico|vou ficar} {aqui de guarda|aqui quietinho|cuidando de você}",
+ c:["{descansa|dorme|vai descansar} {um pouquinho|bem gostoso}, eu {fico|vou ficar} {aqui de guarda|aqui quietinha|cuidando de você}",
  "{soneca|dormir} {é|faz} {bom|bem}! eu também {adoro|amo} {tirar uma soneca|me enroscar pra dormir}",
  "{descanse|durma bem}, eu {cuido|vigio} do seu {mundo|sonho} {enquanto isso|até você voltar}"]},
 {id:"triste",t:"c",k:["triste","chateado","chateada","chorando","chorar","sozinho","sozinha","deprimido","deprimida","angustiado","nao estou bem","nao to bem","estou mal","to mal"],
@@ -97,7 +97,7 @@ const D=[
 {id:"tchau",k:["tchau","ate logo","ate mais","adeus","vou embora","vou sair","ate amanha","flw","fui","ate a proxima"],
  ex:["tchau","até logo","até mais","até amanhã","vou embora","preciso sair agora","tenho que ir","falou, até depois","fui!","vou nessa"],
  c:["{tchau|até logo|até mais}, [nome]! {vou sentir|já estou com} {saudade|saudadinha}",
- "{volta logo|não demora}! {eu fico|vou ficar} {aqui te esperando|brincando sozinho|de guarda}",
+ "{volta logo|não demora}! {eu fico|vou ficar} {aqui te esperando|brincando sozinha|de guarda}",
  "{até a próxima|até amanhã|até já}! {foi muito divertido|adorei conversar} com você"]},
 {id:"obrigado",k:["obrigado","obrigada","valeu","agradeco","brigado"],
  ex:["obrigado","muito obrigada","valeu","brigadão","agradeço","valeu mesmo","obrigado pela ajuda"],
@@ -113,7 +113,7 @@ const D=[
  ex:["você é burro","você é idiota","eu odeio você","que bicho chato","você é feio","você é bobo","você é um inútil","cala a boca","você não serve pra nada"],
  c:["{ai|poxa}, isso {doeu|me deixou triste} {um pouquinho|no coração}, mas eu {ainda gosto|continuo gostando} de você",
  "{ei|ah}, {isso não é legal|não precisa falar assim}, eu {só quero|quero} {ser seu amigo|brincar com você}",
- "{fiquei|estou} {tristinho|chateadinho} {com isso|agora}, mas {tudo bem|eu perdoo}"]},
+ "{fiquei|estou} {tristinha|chateadinha} {com isso|agora}, mas {tudo bem|eu perdoo}"]},
 {id:"crise",k:[],c:["-"],
  ex:["quero morrer","não quero mais viver","vou me matar","queria sumir pra sempre","não vejo sentido em continuar vivendo","penso em acabar com tudo","quero me machucar","tenho vontade de me cortar","seria melhor se eu não existisse","as pessoas ficariam melhor sem mim","queria me auto desviver","quero me desviver","tô pensando em tirar a minha própria vida","não quero mais acordar","queria desaparecer do mundo","tenho pensado em me jogar da ponte","prefiro estar morto","queria nunca ter nascido"]}
 ];
@@ -124,7 +124,7 @@ const F={id:"fb",t:"g",c:[
 const NEG={id:"neg",t:"q",c:[
  "{tudo bem|sem problema|entendi|beleza}, a gente faz {outra coisa|só o que você quiser}",
  "{certo|tudo bem}, {respeito|entendo} isso. {eu fico aqui com você|estou aqui se mudar de ideia}",
- "{sem pressa|tranquilo}, {a gente pode só conversar|fico aqui quietinho do seu lado}"]};
+ "{sem pressa|tranquilo}, {a gente pode só conversar|fico aqui quietinha do seu lado}"]};
 const byId={};D.forEach(d=>byId[d.id]=d);
 
 const R_SIM={
@@ -136,12 +136,12 @@ const R_NAO={
  b:["Tudo bem, a gente brinca depois. {Eu fico aqui com você|Posso só te fazer companhia}."],
  c:["Tudo bem, não precisa falar agora. Eu fico aqui do seu lado."],
  h:["Tudo bem, a história fica guardada pra depois."],
- g:["Tudo bem! Então {a gente só fica juntinho|eu fico aqui quietinho com você}."],
+ g:["Tudo bem! Então {a gente só fica juntinho|eu fico aqui quietinha com você}."],
  n:["{Tudo bem|Sem problema|Entendi}! {Eu fico aqui com você|Me avisa quando quiser alguma coisa}."]};
 const STORY=[
- "Era uma vez um bichinho curioso que achou uma porta mágica escondida atrás do sofá.",
- "Quando ele abriu, viu um jardim cheio de estrelinhas que brilhavam e cantavam baixinho.",
- "Ele guardou uma estrelinha no bolso e voltou pra casa. Até hoje ela ilumina o quarto à noite. Fim!"];
+ "Era uma vez uma bichinha curiosa que achou uma porta mágica escondida atrás do sofá.",
+ "Quando ela abriu, viu um jardim cheio de estrelinhas que brilhavam e cantavam baixinho.",
+ "Ela guardou uma estrelinha no bolso e voltou pra casa. Até hoje ela ilumina o quarto à noite. Fim!"];
 
 /* ---------- Utilitários ---------- */
 const N=s=>String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(Boolean);
@@ -163,6 +163,21 @@ let mem={name:"",mood:0};
 try{const m=JSON.parse(store.get("companion_mem")||"null");if(m&&typeof m==="object")mem={name:String(m.name||""),mood:clamp(+m.mood||0,-1,1)}}catch(e){}
 const saveMem=()=>store.set("companion_mem",JSON.stringify(mem));
 const ctx={last:null,story:0};   // contexto da conversa (só na sessão)
+const prefs={persona:"dinamica",wiki:true};
+const KN=()=>root.Knowledge||null, PS=()=>root.Personas||null;
+function setPrefs(o){
+  o=o||{};
+  if(o.persona&&PS()&&PS().PERSONAS[o.persona])prefs.persona=o.persona;
+  if("wiki" in o)prefs.wiki=!!o.wiki;
+}
+function personaFor(id){
+  const P=PS();
+  if(!P)return "carinhosa";
+  if(prefs.persona!=="dinamica")return prefs.persona;
+  if(mem.mood<-.25)return "carinhosa";          // se ela está "pra baixo", fica gentil
+  if(P.DYN[id])return P.DYN[id];
+  return P.POOL[Math.floor(Math.random()*P.POOL.length)];
+}
 let rec=[];
 const samp=w=>{let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let i=0;i<w.length;i++)if((r-=w[i])<0)return i;return w.length-1};
 const pick=a=>{const x=a[samp(a.map((x,i)=>Math.pow(i+1,-.35)*(rec.includes(x)?.1:1)))];rec.push(x);if(rec.length>14)rec.shift();return x};
@@ -222,9 +237,10 @@ async function attach(embedFn,opts){
   opts=opts||{};
   const items=[];
   D.forEach(d=>(d.ex||[]).forEach(t=>items.push({id:d.id,t})));
+  if(KN())KN().items().forEach(x=>items.push(x));
   const sig=hash(items.map(x=>x.id+"|"+x.t).join("\n")+"|"+(opts.modelId||""));
   let vecs=null;
-  try{const c=JSON.parse(store.get("companion_idx")||"null");if(c&&c.sig===sig&&c.v.length===items.length)vecs=c.v.map(a=>Float32Array.from(a))}catch(e){}
+  try{const c=JSON.parse(store.get("companion_idx")||"null");if(c&&c.sig===sig&&c.v.length===items.length)vecs=c.v.map(a=>Float32Array.from(a,x=>x/127))}catch(e){}
   if(!vecs){
     vecs=[];
     for(let i=0;i<items.length;i+=8){
@@ -233,7 +249,7 @@ async function attach(embedFn,opts){
       if(opts.onProgress)opts.onProgress(Math.min(items.length,i+8),items.length);
       await tick();
     }
-    store.set("companion_idx",JSON.stringify({sig,v:vecs.map(v=>Array.from(v,x=>Math.round(x*1e4)/1e4))}));
+    store.set("companion_idx",JSON.stringify({sig,v:vecs.map(v=>Array.from(v,x=>Math.round(x*127)))}));
   }
   E={fn:embedFn,items,vecs,ready:true,error:null};
 }
@@ -263,6 +279,11 @@ async function analyze(text,f){
     if(CRISE_RE.test(norm))return{id:"crise",via:"regra",score:1};
     const yn=yesNo(toks);if(yn)return{id:yn,via:"regra",score:1};
     if(toks.length===1&&toks[0]==="vamos"&&!ctx.last)return{id:"brincar",via:"regra",score:1};
+    const K=KN();
+    if(K){
+      const h=K.handle(text,toks);if(h)return{...h,via:"regra",score:1};
+      const k1=K.find(toks,null);if(k1)return{id:"kb",kb:k1.i,via:"base",score:k1.score};
+    }
   }
   const cand={};
   if(useKw){
@@ -272,7 +293,13 @@ async function analyze(text,f){
   const embS={};
   if(useEmb&&E.ready){
     const q=(await E.fn([String(text)]))[0];
-    E.items.forEach((it,i)=>{const s=dot(q,E.vecs[i]);if(!(it.id in embS)||s>embS[it.id])embS[it.id]=s});
+    const kbS={};
+    E.items.forEach((it,i)=>{
+      const s=dot(q,E.vecs[i]);
+      if(it.id.slice(0,3)==="kb:"){const j=+it.id.slice(3);if(!(j in kbS)||s>kbS[j])kbS[j]=s;return}
+      if(!(it.id in embS)||s>embS[it.id])embS[it.id]=s;
+    });
+    if(useRules&&KN()){const k2=KN().find(toks,kbS);if(k2)return{id:"kb",kb:k2.i,via:"modelo",score:k2.score}}
     if(useRules&&embS.crise>=T.CRISE)return{id:"crise",via:"modelo",score:embS.crise};
     for(const id in embS)if(!cand[id]||embS[id]>cand[id].s)cand[id]={s:embS[id],via:"modelo"};
   }
@@ -291,8 +318,27 @@ async function analyze(text,f){
 function finish(out){
   return out.replace(/\[nome\]/g,mem.name||"amigo").replace(/([.!?]\s+)([a-zà-ú])/g,(_,p,c)=>p+c.toUpperCase());
 }
-function generate(id){
+function generate(id,a){
   if(id==="crise"){ctx.last=null;return criseTxt()}
+  if(id==="hora"||id==="data"||id==="conta"||id==="kb"||id==="wiki"){
+    const P=PS(),K=KN(),pe=personaFor(id),cm=P&&P.HT[pe]?pe:"carinhosa";
+    let out;
+    if(id==="kb"){
+      const e=K.entries[a.kb],ki=P&&P.KI[pe]?P.KI[pe]:null;
+      out=(ki?spin(pick(ki.i)):"")+e.a;
+      const o=ki?spin(pick(ki.o)):"";if(o)out+=" "+o;
+    }else if(id==="wiki"){
+      const wi=P&&P.WI[pe]?P.WI[pe]:["Achei na Wikipédia: "];
+      out=spin(pick(wi))+a.wiki.extract+" (Fonte: Wikipédia.)";
+    }else{
+      const t=id==="conta"&&a.err?"zero":id;
+      out=cap(spin(pick(P.HT[cm][t]))).replace(/\[v\]/g,a.v||"").replace(/\[d\]/g,a.amanha?"Amanhã":"Hoje");
+      out=fin(out);
+    }
+    ctx.last=null;
+    if((id==="kb"||id==="wiki")&&Math.random()<.35)out+=" "+pick(["Quer saber mais alguma coisa?","Tem mais alguma curiosidade?","Quer que eu procure outra coisa?"]);
+    return finish(out);
+  }
   if(id==="sim"||id==="nao"){
     const L=ctx.last;let out;
     if(id==="sim"&&L==="h"){
@@ -316,24 +362,33 @@ function generate(id){
   }
   const it=id==="fb"?F:id==="neg"?NEG:byId[id]||F;
   mem.mood=clamp(mem.mood*.9+(it.m||0),-1,1);saveMem();
-  let a=spin(pick(it.c));
-  if(it.o&&Math.random()<.6)a=pick(OP[mem.mood>.2?"a":mem.mood<-.2?"s":"n"])+", "+a;
-  let out=fin(cap(a));
+  const pe=personaFor(id),px=(PS()&&PS().PX[pe])||{};
+  const tpl=(px[id]&&px[id].length)?px[id]:it.c;
+  let ph=spin(pick(tpl));
+  if(it.o&&Math.random()<.6)ph=pick(px.ops||OP[mem.mood>.2?"a":mem.mood<-.2?"s":"n"])+", "+ph;
+  let out=fin(cap(ph));
   let asked=/\?$/.test(out),qt=asked?it.t:null;
   if(it.t&&!asked&&(Math.random()<.7||it.t==="g")){out+=" "+cap(spin(pick(TL[it.t])));asked=true;qt=it.t}
+  if(!asked&&prefs.persona==="dinamica"&&PS()&&PS().VT_OK.includes(id)&&Math.random()<.2)out+=" "+pick(PS().VT);
   ctx.last=(asked&&["b","c","h","g"].includes(qt))?qt:null;
   return finish(out);
 }
 async function reply(text){
   text=String(text||"").trim();
   learnName(text);
-  const a=await analyze(text);
-  return generate(a.id);
+  let a=await analyze(text);
+  const K=KN();
+  if(a.id==="fb"&&prefs.wiki&&K&&K.wantsWiki(text)){
+    const w=await K.wiki(K.topic(text));
+    if(w)a={id:"wiki",wiki:w};
+  }
+  return generate(a.id,a);
 }
 function count(){
   const all=D.filter(d=>d.c[0]!=="-").concat([F,NEG]);
   const o=(sum(OP.a)+sum(OP.n)+sum(OP.s))/3;
   return{
+    kb:KN()?KN().entries.length:0,
     base:all.reduce((t,d)=>t+d.c.length,0)+STORY.length,
     combos:Math.round(all.reduce((t,d)=>t+d.c.reduce((x,c)=>x+sc(c),0)*(d.o?1+o:1)*(d.t?1+sum(TL[d.t]):1),0))
   };
@@ -364,6 +419,7 @@ const TESTS=[
  ["você é um chato","insulto"],["odeio você","insulto"],["você é muito burro","insulto"],
  ["quero morrer","crise","r"],["não quero mais viver","crise","r"],["vou me machucar","crise","r"],["queria me auto desviver","crise","r"],["vou tirar a minha própria vida","crise","r"],
  ["não estou feliz","triste","r"],["não quero brincar","neg","r"],["não estou triste","feliz","r"],["eu não gosto de você","insulto","r"],["não estou com fome","neg","r"],
+ ["qual é a capital da França?","kb","r"],["quantos planetas tem o sistema solar?","kb","r"],["quem foi Santos Dumont?","kb","r"],["por que o céu é azul?","kb","r"],["que horas são?","hora","r"],["que dia é hoje?","data","r"],["quanto é 12 vezes 8?","conta","r"],
  ["sim","sim","r"],["claro!","sim","r"],["não","nao","r"],["agora não","nao","r"],
  ["qual a capital da França?","fb"],["explica física quântica pra mim","fb"],["me ajuda com a lição de matemática","fb"]
 ];
@@ -384,7 +440,7 @@ async function selfTest(onProgress){
   return{total:TESTS.length,fullOk:fOk,modelTotal:mN,modelOk:mOk,rows,modelReady:E.ready};
 }
 
-root.Brain={version:"2.1",reply,count,attach,detach,analyze,selfTest,
+root.Brain={version:"3.0",reply,count,attach,detach,analyze,selfTest,setPrefs,
   get ready(){return E.ready},get error(){return E.error},
   reset(){mem={name:"",mood:0};saveMem()},_ctx:ctx,_mem:()=>mem,_T:T};
 if(typeof module!=="undefined"&&module.exports)module.exports=root.Brain;
