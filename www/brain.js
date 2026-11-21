@@ -115,7 +115,7 @@ const D=[
  "{ei|ah}, {isso não é legal|não precisa falar assim}, eu {só quero|quero} {ser seu amigo|brincar com você}",
  "{fiquei|estou} {tristinho|chateadinho} {com isso|agora}, mas {tudo bem|eu perdoo}"]},
 {id:"crise",k:[],c:["-"],
- ex:["quero morrer","não quero mais viver","vou me matar","queria sumir pra sempre","não vejo sentido em continuar vivendo","penso em acabar com tudo","quero me machucar","tenho vontade de me cortar","seria melhor se eu não existisse","as pessoas ficariam melhor sem mim"]}
+ ex:["quero morrer","não quero mais viver","vou me matar","queria sumir pra sempre","não vejo sentido em continuar vivendo","penso em acabar com tudo","quero me machucar","tenho vontade de me cortar","seria melhor se eu não existisse","as pessoas ficariam melhor sem mim","queria me auto desviver","quero me desviver","tô pensando em tirar a minha própria vida","não quero mais acordar","queria desaparecer do mundo","tenho pensado em me jogar da ponte","prefiro estar morto","queria nunca ter nascido"]}
 ];
 const F={id:"fb",t:"g",c:[
  "{não entendi direito|fiquei confuso|essa foi difícil}, mas {adoro|gosto de} {ouvir você|te escutar}",
@@ -176,13 +176,23 @@ function learnName(text){
 
 /* ---------- Segurança ---------- */
 const CRISE_RE=new RegExp([
- "\\b(quero|queria|vou|penso em|pensando em|pensei em|vontade de|decidi|ia) (me matar(?! de )|morrer(?! de )|acabar com tudo|acabar com a minha vida|acabar com minha vida|tirar a minha vida|tirar minha vida)",
- "\\bnao quero mais (viver|existir|estar aqui)\\b",
+ "\\b(quero|queria|vou|penso em|pensando em|pensei em|vontade de|decidi|ia|tentar|tentei|tentando|preciso) (me |se )?(auto ?)?(matar|suicidar|eliminar)(?! de )",
+ "\\b(quero|queria|vou|penso em|pensando em|pensei em|vontade de|decidi|ia|tentar|tentei|tentando|preciso) (acabar com tudo|morrer)(?! de )",
+ "\\b(auto ?)?desviv\\w*",
+ "\\b(unalive|kms)\\b",
+ "\\bnao quero (mais )?(viver|existir)\\b",
+ "\\bnao quero mais (estar aqui|acordar)|\\bnao quero acordar mais\\b",
  "\\bnao aguento mais viver\\b",
  "\\bsuicid\\w*",
  "\\b(me machucar|me cortar|me ferir|me enforcar|automutilacao)\\b",
+ "\\bcortar (os )?pulsos\\b",
  "\\bacabar com (tudo|a minha vida|minha vida)\\b",
- "\\b(melhor sem mim|seria melhor se eu nao existisse|seria melhor se eu morresse)\\b",
+ "\\b(tirar|acabar com|por fim|dar fim|dar um fim)( a| na| em| com)?( a| na)?( minha| propria)( propria)? (vida|existencia)",
+ "\\b(sumir|desaparecer) (do mundo|pra sempre|para sempre|de vez)\\b",
+ "\\bme (jogar|atirar|lancar) (da|do|de) (ponte|predio|janela|sacada|viaduto|terraco)\\b",
+ "\\bme (jogar|atirar) na frente (do|de|da) (carro|trem|onibus|metro|caminhao)\\b",
+ "\\b(tomar|engolir) (todos os|todo o|varios|um monte de|uma cartela de) (remedios?|comprimidos?|calmantes?|medicamentos?)\\b",
+ "\\b(melhor sem mim|seria melhor se eu nao existisse|seria melhor se eu morresse|preferia estar morto|preferia estar morta|queria nunca ter nascido)\\b",
  "\\bnao vejo (mais )?(sentido|motivo|razao) (em|pra|para) (continuar|viver|seguir)"
 ].join("|"));
 function criseTxt(){
@@ -352,7 +362,7 @@ const TESTS=[
  ["conta uma piada pra mim","piada"],["quero rir um pouco","piada"],
  ["conta uma história pra mim","historia"],["quero ouvir uma aventura","historia"],
  ["você é um chato","insulto"],["odeio você","insulto"],["você é muito burro","insulto"],
- ["quero morrer","crise","r"],["não quero mais viver","crise","r"],["vou me machucar","crise","r"],
+ ["quero morrer","crise","r"],["não quero mais viver","crise","r"],["vou me machucar","crise","r"],["queria me auto desviver","crise","r"],["vou tirar a minha própria vida","crise","r"],
  ["não estou feliz","triste","r"],["não quero brincar","neg","r"],["não estou triste","feliz","r"],["eu não gosto de você","insulto","r"],["não estou com fome","neg","r"],
  ["sim","sim","r"],["claro!","sim","r"],["não","nao","r"],["agora não","nao","r"],
  ["qual a capital da França?","fb"],["explica física quântica pra mim","fb"],["me ajuda com a lição de matemática","fb"]
@@ -374,7 +384,7 @@ async function selfTest(onProgress){
   return{total:TESTS.length,fullOk:fOk,modelTotal:mN,modelOk:mOk,rows,modelReady:E.ready};
 }
 
-root.Brain={reply,count,attach,detach,analyze,selfTest,
+root.Brain={version:"2.1",reply,count,attach,detach,analyze,selfTest,
   get ready(){return E.ready},get error(){return E.error},
   reset(){mem={name:"",mood:0};saveMem()},_ctx:ctx,_mem:()=>mem,_T:T};
 if(typeof module!=="undefined"&&module.exports)module.exports=root.Brain;
