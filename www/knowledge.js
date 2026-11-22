@@ -13,6 +13,8 @@ const cont=toks=>toks.filter(w=>!STOP.has(w)).map(ST);
 /* ---------------- BASE DE CONHECIMENTO ---------------- */
 // [ [perguntas...], resposta, (opcional) [palavras-chave obrigatórias] ]
 const RAW=[
+// Sobre a Yui
+[["qual é o significado do seu nome","o que significa yui","por que você se chama yui","o que quer dizer yui"],"Yui é um nome japonês. Dependendo de como se escreve, pode significar coisas como laço ou união, e eu gosto dessa ideia de ligar pessoas e histórias.",["yui"]],
 // Geografia
 [["qual é o maior país do mundo","maior país do mundo"],"O maior país do mundo em área é a Rússia. O Brasil é o quinto.",["pais"]],
 [["qual é o maior oceano","maior oceano do mundo"],"O maior oceano é o Pacífico.",["oceano"]],
@@ -32,6 +34,7 @@ const RAW=[
 [["quantos planetas tem o sistema solar","quantos planetas existem","quais são os planetas do sistema solar"],"São oito planetas: Mercúrio, Vênus, Terra, Marte, Júpiter, Saturno, Urano e Netuno.",["planetas","sistema"]],
 [["qual é o maior planeta do sistema solar","maior planeta"],"Júpiter é o maior planeta do sistema solar.",["plane"]],
 [["qual é o planeta mais próximo do sol"],"Mercúrio é o planeta mais próximo do Sol.",["plane"]],
+[["qual é o menor planeta do sistema solar","menor planeta"],"Mercúrio é o menor planeta do sistema solar.",["plane"]],
 [["por que marte é vermelho","qual é o planeta vermelho"],"Marte parece vermelho por causa do óxido de ferro, a ferrugem, na superfície.",["marte","verme"]],
 [["o que é a lua","o que é a lua da terra"],"A Lua é o satélite natural da Terra, a cerca de 384 mil quilômetros de distância.",["lua"]],
 [["o que é o sol","o que é o sol e de que ele é feito"],"O Sol é uma estrela, uma enorme bola de gás quente. A luz dele leva cerca de 8 minutos para chegar à Terra.",["sol"]],
@@ -130,7 +133,7 @@ const entries=RAW.map(([qs,a,keys])=>{
 const DEF_CUE=/\b(o que|que e|que sao|significa|quer dizer|explica\w*|defin\w*|conceito|me fala|me conta|fale)\b/;
 
 // Procura na base. embMap (opcional): índice da entrada -> similaridade do modelo (0..1).
-const INTENT_W=new Set(["maior","menor","primei","ultim","antig","novo","melho","pior","mais","menos"].map(ST));
+const INTENT_W=new Set(["maior","menor","primei","ultim","antig","novo","melho","pior","mais","menos","nasceu","morreu","faleceu","idade"].map(ST));
 function find(toks,embMap){
   const norm=toks.join(" "),u=cont(toks),us=new Set(u);
   if(!us.size)return null;
@@ -193,7 +196,7 @@ function handle(text,toks){
 const Q_START=/^(?:(?:voce|vc)?\s*sabe\s+)?(?:me\s+)?(?:o que|que|quem|onde|quando|quanto|quantos|quantas|qual|quais|como funciona\w*|por que|porque|pq|fala sobre|fale sobre|explica\w*|pesquis\w+|procur\w+|conta sobre|me fala|me conta|me explica|me diz)\b/;
 function wantsWiki(text){
   const norm=N(text).join(" ");
-  if(/\b(voce|vc|te|seu|sua|teu|tua|meu|minha|eu)\b/.test(norm))return false;
+  if(/\b(voce|vc|te|seu|sua|teu|tua|meu|minha|eu|comigo|mim|me)\b/.test(norm))return false;
   return Q_START.test(norm)&&norm.split(" ").length>=2;
 }
 function topic(text){
@@ -205,14 +208,20 @@ function topic(text){
   rules.forEach(r=>{t=t.replace(r," ")});
   return t.replace(/^ (o|a|os|as|um|uma) /," ").trim();
 }
-function clean(extract){
-  let s=String(extract||"").replace(/\s*\([^)]*\)/g,"").replace(/\s+/g," ").trim();
+function sentences(extract,keepParens){
+  let s=String(extract||"").replace(/\s+/g," ").trim();
+  if(!keepParens)s=s.replace(/\s*\([^)]*\)/g,"").replace(/\s+/g," ").trim();
   if(!s||/\b(pode|podem) (se )?(referir|significar)|\brefere-se a:?$/i.test(s))return null;
-  const parts=s.split(/(?<=[.!?])\s+(?=[A-ZÀ-Ú])/);
-  let out=parts[0];
-  if(parts[1]&&(out+" "+parts[1]).length<=300)out+=" "+parts[1];
-  if(out.length>320)out=out.slice(0,317).replace(/\s+\S*$/,"")+"…";
-  return out;
+  return s.split(/(?<=[.!?])\s+(?=[A-ZÀ-Ú])/);
+}
+function cut(out){return out.length>320?out.slice(0,317).replace(/\s+\S*$/,"")+"…":out}
+// Devolve {text, rest}: as primeiras 1-2 frases e as frases que sobraram (para "me conta mais").
+function clean(extract,keepParens){
+  const parts=sentences(extract,keepParens);
+  if(!parts)return null;
+  let n=1;
+  if(!keepParens&&parts[1]&&(parts[0]+" "+parts[1]).length<=300)n=2;
+  return{text:cut(parts.slice(0,n).join(" ")),rest:parts.slice(n)};
 }
 async function wiki(tp,opts){
   opts=opts||{};
@@ -231,8 +240,8 @@ async function wiki(tp,opts){
   if(!hit)return null;
   const e=await get(`${base}?action=query&format=json&formatversion=2&origin=*&prop=extracts&exintro=1&explaintext=1&redirects=1&titles=${encodeURIComponent(hit.title)}`);
   const pg=e&&e.query&&e.query.pages&&e.query.pages[0];
-  const text=pg&&clean(pg.extract);
-  return text?{title:hit.title,extract:text}:null;
+  const c=pg&&clean(pg.extract,opts.dates);
+  return c?{title:hit.title,extract:c.text,rest:c.rest}:null;
 }
 
 const api={version:"1.0",entries,find,handle,wiki,wantsWiki,topic,clean,N,

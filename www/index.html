@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Companion Chat</title>
+<title>Yui</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;height:100vh;height:100dvh;display:flex;flex-direction:column;background:#14141c;color:#eee;font-family:system-ui,sans-serif}
@@ -34,7 +34,7 @@ footer button{width:46px;height:46px;border-radius:50%;border:0;background:#4a5b
 </style>
 </head>
 <body>
-<header><b>🐾 Companion</b><button class="ic" onclick="toggleCfg()">⚙️</button></header>
+<header><b>Yui <span id="moodTag" style="font-weight:400;font-size:13px;opacity:.7"></span></b><button class="ic" onclick="toggleCfg()">⚙️</button></header>
 <div id="cfg">
   <label>Personalidade</label>
   <select id="persona"></select>
@@ -56,7 +56,9 @@ footer button{width:46px;height:46px;border-radius:50%;border:0;background:#4a5b
   <div id="ver2" class="note"></div>
   <button id="selfTest" class="btn">🧪 Testar compreensão</button>
   <pre id="rep"></pre>
-  <button id="forget" class="btn">Esquecer meu nome</button>
+  <div class="row" style="margin-top:16px"><span>Lembrar do que eu conto</span><button id="memOn" class="tg"></button></div>
+  <div class="note">Gostos, bichinho, compromissos... ficam guardados só no seu aparelho. Desligue para ela não guardar mais nada.</div>
+  <button id="forget" class="btn">Esquecer tudo sobre mim</button>
 </div>
 <div id="chat"></div>
 <footer>
@@ -66,10 +68,13 @@ footer button{width:46px;height:46px;border-radius:50%;border:0;background:#4a5b
 </footer>
 <script src="personas.js"></script>
 <script src="knowledge.js"></script>
+<script src="mind.js"></script>
+<script src="culture.js"></script>
+<script src="create.js"></script>
 <script src="brain.js"></script>
 <script>
 const $=id=>document.getElementById(id);
-const DEF={voiceOn:true,nvoice:"",emb:false,persona:"dinamica",wiki:true};
+const DEF={voiceOn:true,nvoice:"",emb:false,persona:"dinamica",wiki:true,memory:true};
 const S=Object.assign({},DEF,JSON.parse(localStorage.getItem("cfg")||"{}"));
 // limpeza: remove campos de versões antigas (inclusive a chave de API que ficava em texto puro)
 Object.keys(S).forEach(k=>{if(!(k in DEF))delete S[k]});
@@ -111,7 +116,7 @@ async function speak(text){
   try{await nativeSpeak(text)}catch(e){add("Voz: "+(e.message||e),"s")}
 }
 $("testVoice").onclick=async()=>{
-  try{await nativeSpeak("Oi! Essa é a minha voz.")}catch(e){add("Voz: "+(e.message||e),"s")}
+  try{await nativeSpeak("Oi! Eu sou a Yui. Essa é a minha voz.")}catch(e){add("Voz: "+(e.message||e),"s")}
 };
 
 /* ---------- Microfone (reconhecimento nativo) ---------- */
@@ -174,10 +179,13 @@ $("selfTest").onclick=async()=>{
     out.textContent=t;
   }catch(e){out.textContent="Falha no teste: "+(e.message||e)}
 };
-$("forget").onclick=()=>{Brain.reset();add("Pronto, esqueci o seu nome.","s")};
+$("forget").onclick=()=>{Brain.reset();add("Pronto, esqueci tudo o que você me contou.","s");paintMood()};
+function paintMem(){const b=$("memOn");b.textContent=S.memory?"Ligada":"Desligada";b.classList.toggle("on",S.memory)}
+$("memOn").onclick=()=>{S.memory=!S.memory;save();paintMem();applyPrefs()};
+function paintMood(){try{const m=Brain.mood();$("moodTag").textContent=m.emoji+" "+m.label}catch(e){}}
 
 /* ---------- Personalidade e Wikipédia ---------- */
-function applyPrefs(){Brain.setPrefs&&Brain.setPrefs({persona:S.persona,wiki:S.wiki})}
+function applyPrefs(){Brain.setPrefs&&Brain.setPrefs({persona:S.persona,wiki:S.wiki,memory:S.memory})}
 function initPersona(){
   const P=window.Personas,sel=$("persona");
   if(!P){sel.disabled=true;sel.add(new Option("(personas.js ausente)",""));return}
@@ -202,7 +210,7 @@ async function turn(text){
   const wait=add("…","s");
   let rp;
   try{rp=await Brain.reply(text)}catch(e){rp="Hmm, deu um nó na minha cabecinha. Tenta de novo?"}
-  wait.remove();add(rp,"b");
+  wait.remove();add(rp,"b");paintMood();
   busy=false;
   await speak(rp);
 }
@@ -212,16 +220,17 @@ $("txt").onkeydown=e=>{if(e.key==="Enter")sendTxt()};
 $("mic").onclick=nativeListen;
 
 const NEW_BRAIN=typeof Brain.selfTest==="function"&&typeof Brain.attach==="function";
-const NEW3=NEW_BRAIN&&/^3\./.test(Brain.version||"");
+const NEW3=NEW_BRAIN&&/^4\./.test(Brain.version||"");
 $("ver").textContent=NEW3?"Cérebro: brain.js v"+Brain.version+" ✓":"⚠️ brain.js desatualizado: substitua www/brain.js pelo novo e gere o APK de novo.";
-$("ver2").textContent="Conhecimento: "+(window.Knowledge?"knowledge.js v"+Knowledge.version+" ✓":"⚠️ knowledge.js ausente")+" · Personalidades: "+(window.Personas?"personas.js v"+Personas.version+" ✓":"⚠️ personas.js ausente");
+const MODS=[["Conhecimento","Knowledge","knowledge.js"],["Personalidades","Personas","personas.js"],["Mente","Mind","mind.js"],["Cultura","Culture","culture.js"],["Criatividade","Create","create.js"]];
+$("ver2").textContent=MODS.map(m=>m[0]+": "+(window[m[1]]?m[2]+" v"+window[m[1]].version+" ✓":"⚠️ "+m[2]+" ausente")).join(" · ");
 if(!NEW3)add("⚠️ O arquivo www/brain.js do app é uma versão antiga. Substitua e gere o APK de novo.","s");
 const c=Brain.count();
 $("cnt").textContent=typeof c==="object"?"Conhecimentos offline: "+(c.kb||0)+" · frases-base: "+c.base+" · combinações: "+c.combos.toLocaleString("pt-BR"):"";
-initPersona();paintWiki();applyPrefs();
+initPersona();paintWiki();paintMem();applyPrefs();paintMood();
 paintVoiceBtn();setEmb(S.emb?"loading":"off");
 setTimeout(loadVoices,800);setTimeout(loadVoices,3000);
-add("Oi! Toque no 🎤 para falar.","s");
+add("Oi! Eu sou a Yui. Toque no 🎤 para falar comigo.","s");
 startModel();
 </script>
 </body>

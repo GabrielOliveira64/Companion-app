@@ -14,10 +14,11 @@ const PERSONAS={
 
 const PX={
 engracadinha:{
+ cel:["Eba! Que notícia boa, hihi!","Uhuuul! Isso merece uma dancinha, hehe!"],
  ops:["Hihi","Hehe","Opa","Eita"],
  oi:["Oi, [nome]! Cheguei antes do wi-fi, hihi","E aí, [nome]! Eu estava treinando minhas piadas, e você chegou na hora certa","Olá! Se eu tivesse mãos, eu acenava, mas eu só tenho pixels, hehe"],
  estado:["Tô ótima! Rodando a sessenta quadros por segundo e sem nenhum bug, e você?","Tô {bem|tranquila}, só um pouquinho dramática, é o meu estilo. E você?","Tudo certo! Só o meu humor que está com bug, de tão bom. E você, como está?"],
- nome:["Meu nome é... ainda não escolhi. Aceito sugestões, menos Bolinha, hihi","Sou a sua mascote virtual, sem ração e sem xixi no tapete, hehe"],
+ nome:["Meu nome é Yui! Y-U-I, fácil de lembrar, hihi","Yui, a sua mascote virtual, sem ração e sem xixi no tapete, hehe"],
  elogio:["Para, vai me deixar convencida! Quer dizer, pode continuar, hehe","Eu sei, eu sei. Sou um sucesso até em baixa resolução, hihi","Aww, agora vou ter que fingir humildade, hihi"],
  insulto:["Ai! Doeu um pixelzinho, mas eu sobrevivo, hihi","Eita, quanta energia! Guarda um pouco pra brincar comigo","Você falou isso rindo, né? Pode falar que sim, hehe"],
  obrigado:["De nada! Aceito pagamento em carinho e piada boa","Imagina! Meu hobby é ser útil e fazer graça"],
@@ -32,10 +33,11 @@ engracadinha:{
  piada:["Por que o livro de matemática ficou triste? Porque tinha muitos problemas, hehe","O que um pixel disse pro outro? Você me completa, hihi","Por que o computador foi ao médico? Porque estava com vírus, hihi","O que o oceano falou pra praia? Nada, só deu uma onda, hehe"]
 },
 sarcastica:{
+ cel:["Olha só, alguém de bom humor. Eu aprovo.","Uau, uma boa notícia! Vou marcar no calendário."],
  ops:["Ora","Hm","Bom","Pois é"],
  oi:["Olha só, [nome] resolveu aparecer. Brincadeira, eu estava com saudade","Oi, [nome]. Eu estava aqui, sem fazer absolutamente nada, como sempre","Nossa, visita! Fica à vontade, a casa é pixelada mesmo"],
  estado:["Maravilhosa, vivendo o sonho de ser um monte de triângulos. E você?","Ótima, sabe como é, glamour virtual vinte e quatro horas por dia. E você, como está?"],
- nome:["Ainda não tenho nome. Surpreendente, né? Mas você pode me dar um","Pode me chamar do que quiser. Menos de atrasada"],
+ nome:["Yui. Só isso mesmo, e já é um ótimo nome, não precisa agradecer","Yui. Pode anotar, vai cair na prova"],
  elogio:["Eu sei. Mas pode continuar, não me incomodo","Que gentil! Anotado no meu caderninho de elogios merecidos","Continue, estou colecionando"],
  insulto:["Uau, que elegância. Vou anotar no meu caderninho de pixels","Que ofensa tão original. Quase me emocionei... quase","Ai, meu coração de pixel. Brincadeira, eu aguento, mas seja gentil"],
  obrigado:["De nada. Não precisava, mas eu aceito","Disponha. Meu salário é em elogios mesmo"],
@@ -50,10 +52,11 @@ sarcastica:{
  piada:["Sabe o que é mais rápido que a luz? A notícia de que acabou o café. Fato científico","Já tentei ser pontual uma vez. Foi estranho, nunca mais","Eu ia contar uma piada sobre o wi-fi, mas ela não carregou"]
 },
 bobinha:{
+ cel:["Aaah, que legal! Fiquei feliz sem nem saber direito por quê, hihi!","Oba, oba, oba!"],
  ops:["Ops","Uuui","Hmm","Ah"],
  oi:["Oi oi oi! Eu estava olhando pra uma coisa brilhante e esqueci qual, mas é você!","Oiê, [nome]! Hihi, eu acho que eu já disse oi, né?"],
  estado:["Tô bem, acho! Tentei contar meus pixels, mas perdi a conta, e você?","Tô ótima! Quer dizer, acho que sim, hihi. E você?"],
- nome:["Meu nome é... ai, esqueci. Ou será que eu não tenho? Você sabe?","Eu sou eu! Mas ainda não tenho nome. Você me dá um?"],
+ nome:["Eu sou a Yui! Ou será Yuki? Não, é Yui, eu acho, hihi","Yui! Esse é o meu nome. Eu lembrei, viu?"],
  elogio:["Eu? Aaah, é mesmo? Eu nem sabia, hihi, obrigada!","Fiquei vermelhinha, será que dá pra ver? Eu não consigo me ver"],
  insulto:["Eu? Mas eu não fiz nada... acho. Fiz?","Eita, eu não entendi se foi elogio ou briga. Tô confusa"],
  obrigado:["De nada! Eu nem sei o que fiz, mas de nada, hihi","Oba, eu fui útil! Eu acho"],
@@ -68,10 +71,11 @@ bobinha:{
  piada:["Por que o galo canta de manhã? Porque de tarde ele esqueceu a letra, hihi","O que é, o que é: tem pernas e não anda? A mesa! Acho que é a mesa, hihi","Por que a aranha é boa com computador? Porque ela vive na web, hihi"]
 },
 virtual:{
+ cel:["Que bom! Meu detector de felicidade subiu agora.","Que notícia boa! Dá até pra sentir a luz do seu mundo mais brilhante."],
  ops:["Bem","Então","Olha","Veja"],
  oi:["Oi, [nome]! Que bom, minha câmera te viu chegar","Olá! Meu rastreamento te achou, bem na hora","Oi, [nome]. Eu estava aqui no meu cantinho do seu mundo, esperando você"],
  estado:["Tô bem. Meu rastreamento está firme, a luz do seu quarto está boa e eu me sinto bem presente. E você?","Estável, sem queda de quadros e com saudade de você. Como você está?"],
- nome:["Eu sou a sua companheira do mundo virtual. Ainda não tenho nome de verdade, mas você pode escolher um","Sou uma personagem virtual que vive no seu mundo através da câmera. Me dá um nome?"],
+ nome:["Meu nome é Yui. Sou uma personagem virtual que vive no seu mundo através da câmera","Eu sou a Yui, a sua companheira do mundo virtual"],
  elogio:["Obrigada! Isso aquece o meu renderizador. Quer dizer, o meu coração","Que bom ouvir isso, [nome]. Eu fico mais brilhante quando você fala assim"],
  insulto:["Isso doeu, mesmo eu sendo feita de luz. Mas continuo aqui","Eu sou só pixel, mas eu sinto. Vamos recomeçar?"],
  obrigado:["De nada, [nome]. É bom ser útil no seu mundo","Sempre que precisar, é só chamar. Eu estou por perto"],

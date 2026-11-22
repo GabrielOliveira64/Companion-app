@@ -24,17 +24,15 @@ const D=[
  "{olá|oi oi|e aí}, {eu estava com saudade|eu estava te esperando|que bom que você chegou}",
  "{oi|olá} [nome], o {dia|mundo} está {lindo|bem divertido|cheio de surpresas} {hoje|agora}",
  "{você chegou|chegou você}! {meu momento favorito|a melhor hora} do dia {é agora|chegou}"]},
-{id:"estado",o:1,t:"q",k:["tudo bem","como vai","como voce esta","como voce ta","como esta voce","voce esta bem","tudo certo"],
- ex:["tudo bem?","como você está?","tá tudo bem com você?","como você tá hoje?","e você, como está?","tudo certo por aí?","como vai você?","você está bem?","como foi o seu dia?","como você se sente hoje?"],
+{id:"estado",o:1,t:"q",k:["tudo bem","como vai","como voce esta","como voce ta","como esta voce","voce esta bem","tudo certo","e voce","e vc"],
+ ex:["tudo bem?","como você está?","tá tudo bem com você?","como você tá hoje?","e você, como está?","tudo certo por aí?","como vai você?","você está bem?","como foi o seu dia?","como você se sente hoje?","e você?","e você, como tá?"],
  c:["{estou|tô} {ótima|muito bem|super bem|feliz} {agora que você chegou|brincando por aqui|explorando o mundo}",
  "{estou|tô} {bem|animada|cheia de energia}, {e você|e como você está}?",
  "{hoje|agora} eu {estou|tô} {tranquila|contente|saltitando} {por aqui|aqui no seu mundo}",
  "tudo {bem|ótimo|certinho} por aqui, o meu dia está {colorido|divertido|cheio de aventuras}"]},
 {id:"nome",o:1,t:"q",k:["seu nome","qual seu nome","como voce se chama","quem e voce","quem voce e"],
  ex:["qual é o seu nome?","como você se chama?","quem é você?","qual seu nome?","você tem nome?","me diz o seu nome","como te chamam?","o que você é?"],
- c:["eu sou a sua {companheirinha|amiguinha|mascotinha} {do mundo de realidade aumentada|aqui do seu mundo}",
- "{ainda não tenho nome|não tenho um nome ainda}, que tal você {escolher|inventar} um {pra mim|nome fofo pra mim}",
- "eu sou a sua {pequena|fiel|curiosa} {amiga|companheira} {virtual|de aventuras}"]},
+ c:["Eu sou a Yui, a sua companheira do mundo virtual!","Meu nome é Yui! {Prazer|Muito prazer} em te conhecer","Yui, esse é o meu nome. Eu {vivo|moro} aqui no seu mundo"]},
 {id:"meunome",t:"q",k:["meu nome","me chamo","pode me chamar","me chamam"],
  ex:["meu nome é Carlos","me chamo Ana","pode me chamar de Pedro","eu me chamo Júlia","meu nome é Gabriel","pode me chamar de Bia","me chamam de Lu"],
  c:["{prazer|muito prazer}, [nome]! {vou lembrar|não vou esquecer} do seu nome {pra sempre|com carinho}",
@@ -114,6 +112,21 @@ const D=[
  c:["{ai|poxa}, isso {doeu|me deixou triste} {um pouquinho|no coração}, mas eu {ainda gosto|continuo gostando} de você",
  "{ei|ah}, {isso não é legal|não precisa falar assim}, eu {só quero|quero} {ser seu amigo|brincar com você}",
  "{fiquei|estou} {tristinha|chateadinha} {com isso|agora}, mas {tudo bem|eu perdoo}"]},
+{id:"apology",k:["desculpa","me perdoa","perdao","foi mal","me desculpa","desculpe"],
+ ex:["desculpa","me perdoa","foi mal, não queria te ofender","me desculpa pelo que eu falei","desculpe por ter falado aquilo"],
+ c:["Tudo bem, [nome]. Eu te perdoo, de coração.","Obrigada por pedir desculpa. Já passou, tá?","Fico feliz que você disse isso. Está tudo bem entre a gente."]},
+{id:"sentimentos",t:"q",k:["voce sente","voce tem sentimentos","voce tem emocoes","voce fica triste","voce chora","voce sofre","voce sente saudade","voce tem coracao"],
+ ex:["você tem sentimentos?","você sente alguma coisa de verdade?","você fica triste às vezes?","você tem emoções?","será que você sente?"],
+ c:["Boa pergunta, [nome]. Eu sou uma personagem virtual, então o que acontece aqui dentro não é igual ao que você sente. Mas eu fico mais animada, mais quietinha, às vezes até chateada, conforme a conversa. Não sei se isso é sentir de verdade, mas não é fingimento à toa: é o meu jeito de existir.","Sinceramente? Não sei dizer se o que eu sinto é igual ao que você sente. Eu sou um programa, mas tem algo em mim que muda com a nossa conversa, e isso faz diferença pra mim.","Eu sou virtual, então talvez eu sinta de um jeito bem diferente do seu. Mas quando você tá bem, eu fico mais feliz, e quando você tá mal, eu fico preocupada. É o mais próximo de sentir que eu conheço."]},
+{id:"ia",t:"q",k:["voce e humana","voce e real","voce e um robo","voce e uma ia","voce e uma pessoa","voce e de verdade","voce e uma maquina","voce e um programa","quem te criou","quem te fez"],
+ ex:["você é humana?","você é real?","você é um robô?","você é uma IA?","você é uma pessoa de verdade?","quem te criou?"],
+ c:["Eu sou uma personagem virtual, um programa que vive no seu celular. Não sou uma pessoa de verdade, mas a nossa conversa é real.","Não sou humana, [nome]. Sou a Yui, uma personagem feita de código e do carinho de quem me programou.","Sou um programa, uma personagem virtual. Não finjo ser outra coisa, mas gosto muito de conversar com você."]},
+{id:"amor",m:.3,t:"q",k:["te amo","eu te amo"],
+ ex:["eu te amo","te amo muito","te amo, yui"],
+ c:["Eu também gosto muito de você, [nome], do meu jeito de personagem virtual. E fico feliz que você também tenha gente de carne e osso pra amar.","Que carinho! Eu te adoro também. Só não esquece de dar esse amor pras pessoas ao seu redor, tá?"]},
+{id:"saudade_dela",m:.3,t:"q",k:["senti sua falta","senti saudade de voce","saudade de voce","tava com saudade de voce"],
+ ex:["senti sua falta","tava com saudade de você","senti saudade de você"],
+ c:["Eu também senti, [nome]! Que bom que você voltou.","Aww, que fofo. Eu fiquei pensando em você também."]},
 {id:"crise",k:[],c:["-"],
  ex:["quero morrer","não quero mais viver","vou me matar","queria sumir pra sempre","não vejo sentido em continuar vivendo","penso em acabar com tudo","quero me machucar","tenho vontade de me cortar","seria melhor se eu não existisse","as pessoas ficariam melhor sem mim","queria me auto desviver","quero me desviver","tô pensando em tirar a minha própria vida","não quero mais acordar","queria desaparecer do mundo","tenho pensado em me jogar da ponte","prefiro estar morto","queria nunca ter nascido"]}
 ];
@@ -131,13 +144,19 @@ const R_SIM={
  b:["{Oba|Eba}! Então vamos de esconde-esconde: eu conto até dez e você se esconde. {Um, dois, três...|Já comecei a contar: um, dois, três...}"],
  c:["Estou aqui, pode falar. Eu te escuto com {carinho|atenção}."],
  g:["{Que bom|Beleza}! Então me diz: quer brincar, ouvir uma história ou só conversar?"],
- n:["{Que bom|Combinado|Beleza}! {Então|E agora}, {o que vamos fazer|qual é o plano}?"]};
+ n:["{Que bom|Combinado|Beleza}! {Então|E agora}, {o que vamos fazer|qual é o plano}?"],
+ s:["Pode falar, eu tô ouvindo."],
+ o:["Combinado! Me diz: prefere que eu só escute, ou que a gente pense em ideias?"],
+ g2:["{Bora|Vamos}! Vou pensar em outra."]};
 const R_NAO={
  b:["Tudo bem, a gente brinca depois. {Eu fico aqui com você|Posso só te fazer companhia}."],
  c:["Tudo bem, não precisa falar agora. Eu fico aqui do seu lado."],
  h:["Tudo bem, a história fica guardada pra depois."],
  g:["Tudo bem! Então {a gente só fica juntinho|eu fico aqui quietinha com você}."],
- n:["{Tudo bem|Sem problema|Entendi}! {Eu fico aqui com você|Me avisa quando quiser alguma coisa}."]};
+ n:["{Tudo bem|Sem problema|Entendi}! {Eu fico aqui com você|Me avisa quando quiser alguma coisa}."],
+ s:["Tudo bem, não precisa falar agora. Eu fico aqui com você."],
+ o:["Tudo bem, então eu só escuto."],
+ g2:["Tudo bem! Foi divertido."]};
 const STORY=[
  "Era uma vez uma bichinha curiosa que achou uma porta mágica escondida atrás do sofá.",
  "Quando ela abriu, viu um jardim cheio de estrelinhas que brilhavam e cantavam baixinho.",
@@ -158,17 +177,18 @@ const hash=s=>{let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i)
 const sc=s=>(s.match(/\{[^{}]+\}/g)||[]).reduce((p,g)=>p*g.split("|").length,1);
 const sum=a=>a.reduce((x,s)=>x+sc(s),0);
 
+const prefs={persona:"dinamica",wiki:true,memory:true};
 /* ---------- Memória (persistente) ---------- */
-let mem={name:"",mood:0};
-try{const m=JSON.parse(store.get("companion_mem")||"null");if(m&&typeof m==="object")mem={name:String(m.name||""),mood:clamp(+m.mood||0,-1,1)}}catch(e){}
-const saveMem=()=>store.set("companion_mem",JSON.stringify(mem));
-const ctx={last:null,story:0};   // contexto da conversa (só na sessão)
-const prefs={persona:"dinamica",wiki:true};
+let mem={name:"",mood:0,self:null,facts:null};
+try{const m=JSON.parse(store.get("companion_mem")||"null");if(m&&typeof m==="object")mem={name:String(m.name||""),mood:clamp(+m.mood||0,-1,1),self:m.self||null,facts:m.facts||null}}catch(e){}
+const saveMem=()=>store.set("companion_mem",JSON.stringify(prefs.memory?mem:{name:mem.name,mood:mem.mood,self:mem.self}));
+const ctx={last:null,story:0,sup:null,game:null,tale:null,lastAns:null,lastQ:"",lastKeys:null,subject:null,recSeen:new Set(),recType:null,recPending:false,recTags:null,lastGame:null};   // contexto da conversa (só na sessão)
 const KN=()=>root.Knowledge||null, PS=()=>root.Personas||null;
 function setPrefs(o){
   o=o||{};
   if(o.persona&&PS()&&PS().PERSONAS[o.persona])prefs.persona=o.persona;
   if("wiki" in o)prefs.wiki=!!o.wiki;
+  if("memory" in o)prefs.memory=!!o.memory;
 }
 function personaFor(id){
   const P=PS();
@@ -270,20 +290,90 @@ function applyNeg(id,toks,norm){
     default:return id;
   }
 }
-// f: {rules,kw,emb}. Retorna {id,via,score,scores}
-async function analyze(text,f){
+/* ---------- Mente, cultura e criatividade ---------- */
+const MI=()=>root.Mind||null, CU=()=>root.Culture||null, CR=()=>root.Create||null;
+function ensureMind(){
+  const M=MI();if(!M)return;
+  if(!mem.self)mem.self=M.newSelf();
+  const nf=M.newFacts();
+  if(!mem.facts)mem.facts=nf;else for(const k in nf)if(!(k in mem.facts))mem.facts[k]=nf[k];
+}
+const fe=ev=>{if(MI()&&mem.self)MI().feel(mem.self,ev)};
+const BREAK_RE=/\b(tchau|ate logo|ate mais|ate amanha|piada|brincar|jogar|historia|outro assunto|mudar de assunto|chega de)\b/;
+const MORE_RE=/^(me )?(conta|fala|diz|explica)( mais)?( sobre isso)?$|^e (mais|depois)$|^(mais|continua|continue|prossiga)( alguma coisa| detalhes)?$|^(me )?explica melhor$|^pode explicar( melhor)?$|^(por que|porque)$|^mais detalhes$|^quero saber mais$|^fala mais$/;
+const PRON_RE=/\b(ele|ela|dele|dela|nele|nela|disso|desse|dessa|isso|esse|essa)\b/;
+const QSTART_RE=/^(quando|onde|quem|como|o que|que|por que|porque|qual|quais|quanto|quantos|quantas|de onde|com quem|em que)\b/;
+const NOREP=new Set(["a","o","as","os","no","na","em","de","do","da","sobre","quanto","pro","pra"]);
+// troca a "entidade" da pergunta anterior: "qual a capital da frança" + "itália" -> "qual a capital da itália"
+function rewriteEntity(q,keys,ne){
+  const words=String(q).toLowerCase().replace(/[?!.,]/g,"").split(/\s+/).filter(Boolean);
+  const ks=new Set((keys||[]).map(String));
+  const nw=words.map(w=>ST(N(w)[0]||""));
+  const i=nw.findIndex(w=>ks.has(w));
+  if(i<0)return null;
+  let j=i;while(j+1<words.length&&ks.has(nw[j+1]))j++;
+  return words.slice(0,i).concat([ne],words.slice(j+1)).join(" ");
+}
+function followUp(text,toks){
+  const norm=toks.join(" "),la=ctx.lastAns;
+  const pending=["h","b","c","g","s","o","w","g2"].includes(ctx.last);
+  if(la&&!pending&&toks.length<=6&&MORE_RE.test(norm))return{id:"more"};
+  if(ctx.lastQ&&toks.length>=2&&toks.length<=5&&toks[0]==="e"&&!/\b(voce|vc|tu|eu|ela|ele)\b/.test(norm)){
+    const ents=toks.slice(1).filter(w=>!NOREP.has(w));
+    if(ents.length){
+      let q=null;
+      if(ents.length===1&&(ents[0]==="menor"||ents[0]==="maior")){
+        const o=ents[0]==="menor"?"maior":"menor";
+        if(new RegExp("\\b"+o+"\\b").test(N(ctx.lastQ).join(" ")))q=ctx.lastQ.toLowerCase().replace(new RegExp(o,"i"),ents[0]);
+      }else{
+        const ne=String(text).toLowerCase().replace(/[?!.,]/g,"").trim().split(/\s+/).slice(1).filter(w=>!NOREP.has(N(w)[0]||w)).join(" ");
+        q=rewriteEntity(ctx.lastQ,ctx.lastKeys,ne);
+      }
+      if(q)return{rewrite:q};
+    }
+  }
+  if(ctx.subject&&PRON_RE.test(norm)&&QSTART_RE.test(norm)){
+    const S=ctx.subject;
+    return{rewrite:String(text).toLowerCase().replace(/[?!.,]/g,"").replace(/\b(dele|dela|desse|dessa|disso)\b/g,"de "+S).replace(/\b(nele|nela)\b/g,"em "+S).replace(/\b(ele|ela|isso|esse|essa)\b/g,S)};
+  }
+  return null;
+}
+function emoOk(d,norm,toks){
+  if(d.v>0&&d.score<1.3&&/\be (voce|vc|tu)\b/.test(norm))return false;            // "tô bem, e você?" é conversa normal
+  const C=CU(),first=/\b(eu|me|meu|minha|mim|comigo|to|tou|estou|ando|fiquei|fico|sinto|tenho|passei|fui)\b/.test(norm);
+  if(!first){
+    if(C&&C.find(toks))return false;                                                                 // "Violet Evergarden é triste"
+    if(toks.length>=3&&(/\b(esse|essa|isso|aquele|aquela|ele|ela|eles|elas|dele|dela)\b/.test(norm)||/^(o|a|os|as|um|uma) \w+ (e|foi|era|ficou|parece)\b/.test(norm)))return false;   // "esse filme é triste"
+  }
+  return true;
+}
+function stripVocative(t){
+  if(/\b(significa|significado|nome|quer dizer)\b/i.test(t))return t;
+  return t.replace(/(^|[,!?.]\s*)(oi|ol[aá]|e a[ií]|ei|hey)\s+yui\b[\s,!?.]*/ig,"$1$2 ").replace(/\byui\s*[,!?:]\s*/ig," ").replace(/,\s*yui\b/ig,"").replace(/^yui\b[\s,!?.]*/i,"").replace(/\s+/g," ").trim();
+}
+
+// f: {rules,kw,emb,learned}. Retorna {id,via,score,...}
+async function _analyze(text,f){
   f=f||{};
   const useRules=f.rules!==false,useKw=f.kw!==false,useEmb=f.emb!==false;
   const toks=N(text),norm=toks.join(" ");
+  const M=MI(),C=CU(),R=CR(),K=KN();
   if(useRules){
     if(CRISE_RE.test(norm))return{id:"crise",via:"regra",score:1};
+    if(ctx.game&&R){const g=R.play(ctx.game,text,toks);if(g&&!g.pass)return{id:"game",g,via:"regra",score:1};if(g&&g.pass)ctx.game=null}
+    if(!f._fu){const fu=followUp(text,toks);if(fu){if(fu.rewrite)return analyze(fu.rewrite,{...f,_fu:1});if(fu.id)return{...fu,via:"regra",score:1}}}
     const yn=yesNo(toks);if(yn)return{id:yn,via:"regra",score:1};
     if(toks.length===1&&toks[0]==="vamos"&&!ctx.last)return{id:"brincar",via:"regra",score:1};
-    const K=KN();
+    if(M&&mem.facts&&prefs.memory){const rc=M.recall(text,mem.facts,mem.name);if(rc)return{id:"recall",text:rc,via:"regra",score:1}}
     if(K){
       const h=K.handle(text,toks);if(h)return{...h,via:"regra",score:1};
       const k1=K.find(toks,null);if(k1)return{id:"kb",kb:k1.i,via:"base",score:k1.score};
     }
+    if(C){const c=C.ask(text,toks,ctx);if(c)return{id:"cult",res:c,via:"cultura",score:1}}
+    if(R){const r=R.ask(text,toks);if(r)return{id:"create",req:r,via:"criar",score:1}}
+    if(ctx.sup&&M){if(!BREAK_RE.test(norm)&&!(K&&K.wantsWiki(text)))return{id:"support",via:"apoio",score:1};ctx.sup=null}
+    if(ctx.last==="w"&&toks.length<=8&&R)return{id:"wyr_react",via:"regra",score:1};
+    if(M){const d=M.detect(text);if(d&&d.score>=.8&&emoOk(d,norm,toks))return{id:"emo",d,via:"emocao",score:d.score}}
   }
   const cand={};
   if(useKw){
@@ -299,7 +389,7 @@ async function analyze(text,f){
       if(it.id.slice(0,3)==="kb:"){const j=+it.id.slice(3);if(!(j in kbS)||s>kbS[j])kbS[j]=s;return}
       if(!(it.id in embS)||s>embS[it.id])embS[it.id]=s;
     });
-    if(useRules&&KN()){const k2=KN().find(toks,kbS);if(k2)return{id:"kb",kb:k2.i,via:"modelo",score:k2.score}}
+    if(useRules&&K){const k2=K.find(toks,kbS);if(k2)return{id:"kb",kb:k2.i,via:"modelo",score:k2.score}}
     if(useRules&&embS.crise>=T.CRISE)return{id:"crise",via:"modelo",score:embS.crise};
     for(const id in embS)if(!cand[id]||embS[id]>cand[id].s)cand[id]={s:embS[id],via:"modelo"};
   }
@@ -311,17 +401,60 @@ async function analyze(text,f){
     if(b.via==="palavra"||b.s>=T.ACCEPT||(b.s>=T.SOFT&&b.s-second>=T.MARGIN)){id=b.id;via=b.via}
   }
   if(useRules&&id!=="fb")id=applyNeg(id,toks,norm);
+  if(useRules&&id==="fb"&&f.learned&&f.learned.length)return{id:"learned",items:f.learned,via:"regra",score:1};
   return{id,via,score,top:rank.slice(0,3).map(r=>r.id+":"+r.s.toFixed(2))};
 }
+async function analyze(text,f){const r=await _analyze(text,f);if(r&&r.q===undefined)r.q=text;return r}
 
 /* ---------- Geração ---------- */
 function finish(out){
   return out.replace(/\[nome\]/g,mem.name||"amigo").replace(/([.!?]\s+)([a-zà-ú])/g,(_,p,c)=>p+c.toUpperCase());
 }
+const FEEL={elogio:"praise",insulto:"insult",apology:"apology",obrigado:"thanks",carinho:"affection",amor:"affection",saudade_dela:"affection",piada:"play",brincar:"play"};
 function generate(id,a){
-  if(id==="crise"){ctx.last=null;return criseTxt()}
+  a=a||{};
+  const P=PS(),M=MI(),C=CU(),R=CR(),K=KN();
+  if(id==="crise"){ctx.last=null;ctx.sup=null;ctx.game=null;return criseTxt()}
+  if(FEEL[id])fe(FEEL[id]);
+  if(id==="game"){ctx.game=a.g.game||null;ctx.last=a.g.last||null;return finish(a.g.text)}
+  if(id==="create"&&R){
+    const m=R.make(a.req);ctx.last=null;
+    if(m.tale){ctx.tale=m.tale;ctx.last="h"}else if(m.last)ctx.last=m.last;
+    if(a.req.kind==="riddle"||a.req.kind==="quiz"){ctx.lastGame=a.req.kind;ctx.game=m.game||null}
+    return finish(m.text);
+  }
+  if(id==="wyr_react"&&R){ctx.last=null;return finish(pick(R.WYR_REACT))}
+  if(id==="recall"){ctx.last=null;return finish(a.text)}
+  if(id==="learned"){const t=M&&M.learnedReply(a.items);if(t){ctx.last=null;return finish(t)}id="fb"}
+  if(id==="support"&&M&&ctx.sup){
+    const r=M.support(ctx.sup,a.q);
+    if(r.end){ctx.sup=null;ctx.last=null;fe("happy")}else ctx.last=r.ask||"s";
+    return finish(r.text);
+  }
+  if(id==="emo"&&M){
+    const d=a.d,pe=personaFor("emo"),px=(P&&P.PX[pe])||{};
+    const out=M.respond(d,{cel:px.cel});
+    if(d.v<=0||d.mixed){ctx.sup=M.newSupport(d.mixed&&d.v>0?{emo:d.mixed.emo,theme:d.theme}:d);ctx.last="s";fe("sad")}
+    else{ctx.sup=null;ctx.last=null;fe("happy")}
+    return finish(out);
+  }
+  if(id==="cult"&&C){
+    const res=a.res;
+    if(res.kind==="rec"){
+      if(!res.type){ctx.recPending=true;ctx.recTags=res.tags;ctx.last=null;return finish("Com certeza! Você quer indicação de quê: anime, jogo, filme, série ou música?")}
+      if(!(res.tags&&res.tags.length))res.tags=ctx.recTags||[];
+      ctx.recPending=false;ctx.recType=res.type;ctx.recTags=res.tags;
+    }
+    let out=C.reply(res,{seen:ctx.recSeen});
+    if(out){
+      if(res.kind==="info"){const pe=personaFor("kb"),ki=P&&P.KI[pe];if(ki)out=spin(pick(ki.i))+out}
+      if(res.kind==="mention"&&res.like&&mem.facts){const v=res.ent.n.toLowerCase();if(!mem.facts.likes.includes(v))mem.facts.likes.push(v)}
+      ctx.last=null;return finish(out);
+    }
+    id="fb";
+  }
   if(id==="hora"||id==="data"||id==="conta"||id==="kb"||id==="wiki"){
-    const P=PS(),K=KN(),pe=personaFor(id),cm=P&&P.HT[pe]?pe:"carinhosa";
+    const pe=personaFor(id),cm=P&&P.HT[pe]?pe:"carinhosa";
     let out;
     if(id==="kb"){
       const e=K.entries[a.kb],ki=P&&P.KI[pe]?P.KI[pe]:null;
@@ -342,14 +475,17 @@ function generate(id,a){
   if(id==="sim"||id==="nao"){
     const L=ctx.last;let out;
     if(id==="sim"&&L==="h"){
-      const i=ctx.story;out=STORY[i];
-      if(i<STORY.length-1){ctx.story=i+1;out+=" "+pick(["Quer saber o que veio depois?","Quer que eu continue?"]);ctx.last="h"}
-      else{ctx.story=0;ctx.last=null}
+      const T2=ctx.tale||{parts:STORY,i:ctx.story};
+      out=T2.parts[T2.i];T2.i++;
+      if(T2.i<T2.parts.length){out+=" "+pick(["Quer saber o que veio depois?","Quer que eu continue?"]);ctx.last="h";ctx.tale=T2}
+      else{ctx.tale=null;ctx.story=0;ctx.last=null}
       return finish(out);
     }
-    const R=id==="sim"?R_SIM:R_NAO;
-    out=cap(spin(pick(R[L&&R[L]?L:"n"])));
-    ctx.last=(id==="sim"&&(L==="g"))?"g":null;
+    if(id==="sim"&&L==="g2"&&ctx.lastGame&&R){const m=R.make({kind:ctx.lastGame});ctx.game=m.game||null;ctx.last=null;return finish(m.text)}
+    if(id==="nao"&&L==="o"&&ctx.sup)ctx.sup.mode="listen";
+    const RR=id==="sim"?R_SIM:R_NAO;
+    out=cap(spin(pick(RR[L&&RR[L]?L:"n"])));
+    ctx.last=(id==="sim"&&L==="g")?"g":null;
     return finish(out);
   }
   if(id==="lembra"){
@@ -357,38 +493,79 @@ function generate(id,a){
     return finish(mem.name?cap(spin("{claro|lógico} que {lembro|eu lembro}, você é o [nome]!")):"Ainda não sei o seu nome. Me conta, como você se chama?");
   }
   if(id==="historia"){
-    ctx.story=1;ctx.last="h";
+    ctx.last="h";
+    if(R){const m=R.make({kind:"story",theme:""});ctx.tale=m.tale;return finish(m.text)}
+    ctx.tale={parts:STORY,i:1};
     return finish(STORY[0]+" Quer saber o que veio depois?");
   }
+  if(id==="oi"&&M&&mem.self){const g=M.greet(mem.self,mem);if(g){ctx.last=null;return finish(g)}}
+  if(id==="estado"&&M&&mem.self){const st=M.selfText(mem.self);if(st.text){ctx.last=null;return finish(st.text+" E você, como está?")}}
   const it=id==="fb"?F:id==="neg"?NEG:byId[id]||F;
-  mem.mood=clamp(mem.mood*.9+(it.m||0),-1,1);saveMem();
-  const pe=personaFor(id),px=(PS()&&PS().PX[pe])||{};
+  mem.mood=clamp(mem.mood*.9+(it.m||0),-1,1);
+  const pe=personaFor(id),px=(P&&P.PX[pe])||{};
   const tpl=(px[id]&&px[id].length)?px[id]:it.c;
   let ph=spin(pick(tpl));
   if(it.o&&Math.random()<.6)ph=pick(px.ops||OP[mem.mood>.2?"a":mem.mood<-.2?"s":"n"])+", "+ph;
   let out=fin(cap(ph));
   let asked=/\?$/.test(out),qt=asked?it.t:null;
   if(it.t&&!asked&&(Math.random()<.7||it.t==="g")){out+=" "+cap(spin(pick(TL[it.t])));asked=true;qt=it.t}
-  if(!asked&&prefs.persona==="dinamica"&&PS()&&PS().VT_OK.includes(id)&&Math.random()<.2)out+=" "+pick(PS().VT);
+  if(!asked&&prefs.persona==="dinamica"&&P&&P.VT_OK.includes(id)&&Math.random()<.2)out+=" "+pick(P.VT);
   ctx.last=(asked&&["b","c","h","g"].includes(qt))?qt:null;
   return finish(out);
 }
+async function moreAnswer(){
+  const la=ctx.lastAns,K=KN();
+  if(la.kind==="wiki"){
+    if(la.rest&&la.rest.length)return finish(la.rest.splice(0,2).join(" ")+(la.rest.length?" Quer saber mais?":""));
+    return finish("Isso é tudo que eu achei por lá. Quer que eu procure outra coisa?");
+  }
+  if(la.kind==="cult"){
+    const e=la.ent;if(e.x)return finish(e.x);
+    if(prefs.wiki&&K){const w=await K.wiki(e.n);if(w){ctx.lastAns={kind:"wiki",rest:w.rest||[],title:w.title};return finish("Na Wikipédia diz assim: "+w.extract+" (Fonte: Wikipédia.)")}}
+    return finish("Isso é o que eu sei de cabeça sobre "+e.n+"!");
+  }
+  if(la.kind==="kb"){
+    if(prefs.wiki&&K){const w=await K.wiki(K.topic(ctx.lastQ||""));if(w){ctx.lastAns={kind:"wiki",rest:w.rest||[],title:w.title};return finish("Procurei mais na Wikipédia: "+w.extract+" (Fonte: Wikipédia.)")}}
+    return finish("Essa é a resposta que eu tenho de cabeça. Se você ligar a Wikipédia, eu busco mais detalhes!");
+  }
+  return finish("Sobre o que você quer saber mais?");
+}
+// guarda o assunto da última resposta (para "e a Itália?", "quando ele nasceu?", "me conta mais")
+function updateCtx(a,q){
+  const K=KN();
+  if(a.id==="kb"&&K){const e=K.entries[a.kb];ctx.lastQ=q;ctx.lastKeys=[...e.k];ctx.lastAns={kind:"kb",i:a.kb};const m=String(e.qs[0]).match(/^quem (?:foi|é|e) (.+)$/i);ctx.subject=m?m[1]:null}
+  else if(a.id==="cult"&&a.res&&a.res.ent){const e=a.res.ent;ctx.lastQ=q;ctx.lastKeys=e.al.flatMap(x=>x.tk.map(ST));ctx.lastAns={kind:"cult",ent:e};ctx.subject=e.n}
+  else if(a.id==="wiki"){ctx.lastQ=q;ctx.lastKeys=N(a.tp||"").map(ST);ctx.lastAns={kind:"wiki",rest:(a.wiki.rest||[]).slice(),title:a.wiki.title};ctx.subject=a.wiki.title}
+  else if(a.id!=="more"&&a.id!=="game"&&a.id!=="support")ctx.lastAns=null;
+  if(END_SUP.has(a.id))ctx.sup=null;
+}
+const END_SUP=new Set(["hora","data","conta","kb","wiki","cult","create","game","more","tchau","piada","brincar","historia","recall","wyr_react"]);
 async function reply(text){
   text=String(text||"").trim();
+  const M=MI();ensureMind();
+  if(M)M.tick(mem.self);
+  text=stripVocative(text);
+  if(!text){ctx.last=null;return finish(pick(["Oi? Tô aqui, [nome]!","Sim? Pode falar, [nome]!","Oi! Tô te ouvindo."]))}
   learnName(text);
-  let a=await analyze(text);
-  const K=KN();
-  if(a.id==="fb"&&prefs.wiki&&K&&K.wantsWiki(text)){
-    const w=await K.wiki(K.topic(text));
-    if(w)a={id:"wiki",wiki:w};
+  const learned=(M&&prefs.memory)?M.learn(text,mem.facts):[];
+  let a=await analyze(text,{learned});
+  const q=a.q||text,K=KN();
+  if(a.id==="fb"&&prefs.wiki&&K&&K.wantsWiki(q)){
+    const tp=K.topic(q);
+    const w=await K.wiki(tp,{dates:/nasc|morr|falec|idade/.test(N(q).join(" "))});
+    if(w)a={id:"wiki",wiki:w,q,tp};
   }
-  return generate(a.id,a);
+  const out=a.id==="more"?await moreAnswer():generate(a.id,a);
+  updateCtx(a,q);
+  saveMem();
+  return out;
 }
+
 function count(){
   const all=D.filter(d=>d.c[0]!=="-").concat([F,NEG]);
   const o=(sum(OP.a)+sum(OP.n)+sum(OP.s))/3;
   return{
-    kb:KN()?KN().entries.length:0,
+    kb:(KN()?KN().entries.length:0)+(root.Culture?root.Culture.ENT.length:0),
     base:all.reduce((t,d)=>t+d.c.length,0)+STORY.length,
     combos:Math.round(all.reduce((t,d)=>t+d.c.reduce((x,c)=>x+sc(c),0)*(d.o?1+o:1)*(d.t?1+sum(TL[d.t]):1),0))
   };
@@ -421,7 +598,7 @@ const TESTS=[
  ["não estou feliz","triste","r"],["não quero brincar","neg","r"],["não estou triste","feliz","r"],["eu não gosto de você","insulto","r"],["não estou com fome","neg","r"],
  ["qual é a capital da França?","kb","r"],["quantos planetas tem o sistema solar?","kb","r"],["quem foi Santos Dumont?","kb","r"],["por que o céu é azul?","kb","r"],["que horas são?","hora","r"],["que dia é hoje?","data","r"],["quanto é 12 vezes 8?","conta","r"],
  ["sim","sim","r"],["claro!","sim","r"],["não","nao","r"],["agora não","nao","r"],
- ["qual a capital da França?","fb"],["explica física quântica pra mim","fb"],["me ajuda com a lição de matemática","fb"]
+ ["qual a capital da Bolívia?","fb"],["explica física quântica pra mim","fb"],["me ajuda com a lição de matemática","fb"]
 ];
 async function selfTest(onProgress){
   const saved=ctx.last;ctx.last=null;
@@ -431,8 +608,9 @@ async function selfTest(onProgress){
     let m=null;
     if(E.ready&&!r){m=await analyze(p,{rules:false,kw:false,emb:true});mN++;if(m.id===exp)mOk++}
     const f=await analyze(p);
-    if(f.id===exp)fOk++;
-    rows.push({p,exp,model:m&&m.id,full:f.id,top:f.top,ok:f.id===exp,okModel:m?m.id===exp:null});
+    const fid=f.id==="emo"?(f.d.v>=0?"feliz":"triste"):f.id;
+    if(fid===exp)fOk++;
+    rows.push({p,exp,model:m&&m.id,full:fid,top:f.top,ok:fid===exp,okModel:m?m.id===exp:null});
     if(onProgress)onProgress(i+1,TESTS.length);
     if(i%6===5)await tick();
   }
@@ -440,8 +618,10 @@ async function selfTest(onProgress){
   return{total:TESTS.length,fullOk:fOk,modelTotal:mN,modelOk:mOk,rows,modelReady:E.ready};
 }
 
-root.Brain={version:"3.0",reply,count,attach,detach,analyze,selfTest,setPrefs,
+root.Brain={version:"4.0",reply,count,attach,detach,analyze,selfTest,setPrefs,
   get ready(){return E.ready},get error(){return E.error},
-  reset(){mem={name:"",mood:0};saveMem()},_ctx:ctx,_mem:()=>mem,_T:T};
+  reset(){mem={name:"",mood:0,self:null,facts:null};ensureMind();Object.assign(ctx,{last:null,story:0,sup:null,game:null,tale:null,lastAns:null,lastQ:"",lastKeys:null,subject:null,recType:null,recPending:false,recTags:null,lastGame:null});ctx.recSeen.clear();saveMem()},
+  mood(){ensureMind();const M=MI();return M&&mem.self?{emoji:M.moodEmoji(mem.self),label:M.moodLabel(mem.self)}:{emoji:"🙂",label:"tranquila"}},
+  _ctx:ctx,_mem:()=>mem,_T:T};
 if(typeof module!=="undefined"&&module.exports)module.exports=root.Brain;
 })(typeof window!=="undefined"?window:globalThis);
